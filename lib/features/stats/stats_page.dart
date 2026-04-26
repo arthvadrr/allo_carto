@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import '../../core/services/database_service.dart';
 import '../../core/models/user_word_progress.dart';
 
-class ReviewPage extends StatefulWidget {
-  const ReviewPage({super.key});
+class StatsPage extends StatefulWidget {
+  const StatsPage({super.key});
 
   @override
-  State<ReviewPage> createState() => _ReviewPageState();
+  State<StatsPage> createState() => _StatsPageState();
 }
 
-class _ReviewPageState extends State<ReviewPage> {
+class _StatsPageState extends State<StatsPage> {
   final DatabaseService _database = DatabaseService.instance;
 
   /*
@@ -85,7 +85,7 @@ class _ReviewPageState extends State<ReviewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Review')),
+      appBar: AppBar(title: const Text('Stats')),
       body: _buildBody(context),
     );
   }
@@ -190,6 +190,7 @@ class _TierCountChip extends StatelessWidget {
             props.label,
             style: TextStyle(color: props.color, fontWeight: FontWeight.w600),
           ),
+          const Spacer(), // Push the text to the right
           const SizedBox(width: 6),
           Text('$count', style: Theme.of(context).textTheme.labelLarge),
         ],
