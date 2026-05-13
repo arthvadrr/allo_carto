@@ -10,11 +10,14 @@ import alloTheme from './alloTheme';
  * Showing the header literally shows "(tabs)" in the header, 
  * read about the stack component.
  */
+console.log(alloTheme);
+
 export default function AppLayout() {
   return (
     <ThemeProvider value={alloTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="deck" options={{ headerShown: true, headerBackTitle: 'Home' }} />
       </Stack>
     </ThemeProvider>
   )

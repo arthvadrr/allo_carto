@@ -12,6 +12,7 @@ export default function TabsLayout({ size = 28 }) {
         name="index"
         options={{
           title: 'Home',
+          headerTitle: 'Home',
           tabBarIcon: ({ color }) => <MaterialIcons color={color} size={size} name="home" />,
         }}
       />
