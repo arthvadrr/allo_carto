@@ -9,7 +9,7 @@ export default function TabsLayout({ size = 28 }) {
   return (
     <Tabs>
       <Tabs.Screen
-        name="home"
+        name="index"
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <MaterialIcons color={color} size={size} name="home" />,
