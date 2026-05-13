@@ -1,4 +1,6 @@
-import { Stack } from "expo-router";
+import { Stack } from "@/node_modules/expo-router";
+import { ThemeProvider } from "@react-navigation/native";
+import alloTheme from './alloTheme';
 
 /*
  * Stack navigator
@@ -10,8 +12,10 @@ import { Stack } from "expo-router";
  */
 export default function AppLayout() {
   return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-    </Stack>
+    <ThemeProvider value={alloTheme}>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      </Stack>
+    </ThemeProvider>
   )
 }

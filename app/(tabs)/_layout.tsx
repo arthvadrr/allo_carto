@@ -1,5 +1,5 @@
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { Tabs } from "expo-router";
+import MaterialIcons from '@/node_modules/@expo/vector-icons/MaterialIcons';
+import { Tabs } from "@/node_modules/expo-router";
 
 /**
  * Icon dir here
@@ -29,6 +29,6 @@ export default function TabsLayout({ size = 28 }) {
           tabBarIcon: ({ color }) => <MaterialIcons color={color} size={size} name="settings" />,
         }}
       />
-    </Tabs >
+    </Tabs>
   )
 }
