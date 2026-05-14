@@ -64,3 +64,35 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+## Styleguide
+
+### Colors
+
+PrimaryDark: #1C5B5E
+
+PrimaryLight: #7BADA6
+
+SecondaryDark: #762D3D
+
+SecondaryLight: #E09FAD
+
+textDark: #121212
+
+textLight: #F7F7F7
+
+backgroundDark: #131A1B
+
+backgroundLight: #DBFBF0
+
+borderDark:
+
+borderLight
+
+## Fonts
+
+Fonts are handled by expo. Lexend (google fonts) is the only font being used in this project and it was included via ` npx expo install @expo-google-fonts/lexend`. The package is a runtime dependency (in `package.json`).
+
+The font is also included in `assets/fonts` although this file isn't used. Note we could use this font file via the `useFonts` hook using expo.
+
+https://blog.logrocket.com/how-to-add-custom-fonts-react-native/

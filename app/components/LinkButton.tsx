@@ -17,11 +17,28 @@ interface LinkButtonProps {
  * TODO: hover styles
  */
 export default function LinkButton({ screen, params, action, href, children, ...rest }: LinkButtonProps) {
-  const { hoveredLinkButtonStyles, linkButtonStyles } = styles;
+  const {
+    hoveredLinkButtonStyles,
+    pressedLinkButtonStyles,
+    linkButtonStyles,
+  } = styles;
   const props = useLinkProps({ screen, params, action, href });
   const [isHovered, setIsHovered] = useState(false);
+  const [isPressed, setIsPressed] = useState(false);
+
+  let currentStyles: Record<string, any> = linkButtonStyles;
+
+  if (isPressed) {
+    currentStyles = { ...linkButtonStyles, ...pressedLinkButtonStyles };
+  } else if (isHovered) {
+    currentStyles = { ...linkButtonStyles, ...hoveredLinkButtonStyles };
+  }
 
   console.log(isHovered);
+
+  if (isPressed) {
+
+  }
 
   return (
     <Pressable
@@ -29,7 +46,9 @@ export default function LinkButton({ screen, params, action, href, children, ...
       {...rest}
       onHoverIn={() => setIsHovered(true)}
       onHoverOut={() => setIsHovered(false)}
-      style={isHovered ? hoveredLinkButtonStyles : linkButtonStyles}
+      onPressIn={() => setIsPressed(true)}
+      onPressOut={() => setIsPressed(false)}
+      style={currentStyles}
     >
       <Text>{children}</Text>
     </Pressable>
