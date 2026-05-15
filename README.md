@@ -10,89 +10,40 @@ The idea is to help users track how many new words they're learning a day and ho
 
 ![Stats](stats.jpg)
 
-## Commands
-
-- Run on simulator: flutter run -d "iPhone 17 Pro"
-
-# Welcome to your Expo app 👋
-
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
-
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-
-## Styleguide
+## Style Guide
 
 ### Colors
 
-PrimaryDark: #1C5B5E
+#### Dark
 
-PrimaryLight: #7BADA6
+Primary : #1C5B5E
 
-SecondaryDark: #762D3D
+Secondary : #762D3D
 
-SecondaryLight: #E09FAD
+Text : #121212
 
-textDark: #121212
+Background : #131A1B
 
-textLight: #F7F7F7
+Border : #1B2B31
 
-backgroundDark: #131A1B
+Secondary Border : #382326
 
-backgroundLight: #DBFBF0
+#### Light
 
-borderDark:
+Primary: #7BADA6
 
-borderLight
+Secondary: #E09FAD
 
-## Fonts
+Text: #F7F7F7
 
-Fonts are handled by expo. Lexend (google fonts) is the only font being used in this project and it was included via ` npx expo install @expo-google-fonts/lexend`. The package is a runtime dependency (in `package.json`).
+Background: #DBFBF0
 
-The font is also included in `assets/fonts` although this file isn't used. Note we could use this font file via the `useFonts` hook using expo.
+Border: #465B5D
+
+Secondary Border: #6B474B
+
+### Fonts
+
+Lexend is used throughout the application. The font is included in `app/assets/fonts/lexend-variable.ttf` and loaded asychonously via the `useFonts` hook via expo.
 
 https://blog.logrocket.com/how-to-add-custom-fonts-react-native/

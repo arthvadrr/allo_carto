@@ -1,4 +1,5 @@
 import { DarkTheme, Theme } from '@react-navigation/native';
+import { colors } from './styles';
 
 /**
  * This file is meant to be used sparingly.
@@ -11,7 +12,8 @@ const alloTheme: Theme = {
 	dark: true,
 	colors: {
 		...DarkTheme.colors,
-		background: '#171417',
+		background: colors.dark.background,
+		text: colors.light.text,
 	},
 	fonts: {
 		regular: {

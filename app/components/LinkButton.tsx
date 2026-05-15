@@ -1,56 +1,66 @@
-import { Text } from '@react-navigation/elements';
 import { useLinkProps } from '@react-navigation/native';
 import { LinkProps } from 'expo-router';
-import { ReactNode, useState } from 'react';
-import { Pressable } from 'react-native';
+import { ReactElement, ReactNode, useState } from 'react';
+import { Pressable, Text } from 'react-native';
 import styles from '../styles';
 
 interface LinkButtonProps {
   screen: string;
   params: LinkProps;
+  SVGElement?: ReactElement;
   action?: Readonly<any>;
   href?: string;
   children?: ReactNode;
 }
 
-/*
- * TODO: hover styles
+/**
+ * A link that looks like a button
  */
-export default function LinkButton({ screen, params, action, href, children, ...rest }: LinkButtonProps) {
+export default function LinkButton({ screen, params, action, href, children, SVGElement, ...moreProps }: LinkButtonProps) {
+  /**
+   * Style vars
+   */
   const {
-    hoveredLinkButtonStyles,
-    pressedLinkButtonStyles,
     linkButtonStyles,
+    linkTextStyles,
+    hoveredLinkButtonStyles,
+    hoveredLinkTextStyles,
+    pressedLinkButtonStyles,
+    pressedLinkTextStyles
   } = styles;
+  let currentLinkButtonStyles = linkButtonStyles;
+  let currentLinkTextStyles = linkTextStyles;
+
+  /**
+   * State/prop vars
+   */
   const props = useLinkProps({ screen, params, action, href });
+  const allTheProps = { ...props, ...moreProps };
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
 
-  let currentStyles: Record<string, any> = linkButtonStyles;
-
+  /**
+   * Pressed styles before hovered styles
+   */
   if (isPressed) {
-    currentStyles = { ...linkButtonStyles, ...pressedLinkButtonStyles };
+    currentLinkButtonStyles = { ...linkButtonStyles, ...pressedLinkButtonStyles };
+    currentLinkTextStyles = { ...linkTextStyles, ...pressedLinkTextStyles };
   } else if (isHovered) {
-    currentStyles = { ...linkButtonStyles, ...hoveredLinkButtonStyles };
-  }
-
-  console.log(isHovered);
-
-  if (isPressed) {
-
+    currentLinkButtonStyles = { ...linkButtonStyles, ...hoveredLinkButtonStyles };
+    currentLinkTextStyles = { ...linkTextStyles, ...hoveredLinkTextStyles };
   }
 
   return (
     <Pressable
-      {...props}
-      {...rest}
+      {...allTheProps}
       onHoverIn={() => setIsHovered(true)}
       onHoverOut={() => setIsHovered(false)}
       onPressIn={() => setIsPressed(true)}
       onPressOut={() => setIsPressed(false)}
-      style={currentStyles}
+      style={currentLinkButtonStyles}
     >
-      <Text>{children}</Text>
+      {SVGElement}
+      <Text style={currentLinkTextStyles}>{children}</Text>
     </Pressable>
   );
 };
