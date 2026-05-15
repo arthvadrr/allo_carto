@@ -1,14 +1,16 @@
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import LinkButton from '../components/LinkButton';
-import styles from '../styles';
+import SVGQuiz from '../components/svg/SVGQuiz';
+import { colors } from '../styles';
 
 export default function HomeScreen() {
-  const { text } = styles;
-
   return (
     <View>
-      <Text style={text}>Welcome</Text>
-      <LinkButton screen="deck" params={{ id: 'jane', href: '/' }}>
+      <LinkButton
+        screen="deck"
+        params={{ href: '/' }}
+        SVGElement={<SVGQuiz height={'100px'} width={'100%'} color={colors.light.secondary} />}
+      >
         Review a Deck
       </LinkButton>
     </View>

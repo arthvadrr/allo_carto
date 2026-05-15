@@ -10,57 +10,40 @@ The idea is to help users track how many new words they're learning a day and ho
 
 ![Stats](stats.jpg)
 
-## Commands
+## Style Guide
 
-- Run on simulator: flutter run -d "iPhone 17 Pro"
+### Colors
 
-# Welcome to your Expo app 👋
+#### Dark
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Primary : #1C5B5E
 
-## Get started
+Secondary : #762D3D
 
-1. Install dependencies
+Text : #121212
 
-   ```bash
-   npm install
-   ```
+Background : #131A1B
 
-2. Start the app
+Border : #1B2B31
 
-   ```bash
-   npx expo start
-   ```
+Secondary Border : #382326
 
-In the output, you'll find options to open the app in a
+#### Light
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+Primary: #7BADA6
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Secondary: #E09FAD
 
-## Get a fresh project
+Text: #F7F7F7
 
-When you're ready, run:
+Background: #DBFBF0
 
-```bash
-npm run reset-project
-```
+Border: #465B5D
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Secondary Border: #6B474B
 
-## Learn more
+### Fonts
 
-To learn more about developing your project with Expo, look at the following resources:
+Lexend is used throughout the application. The font is included in `app/assets/fonts/lexend-variable.ttf` and loaded asychonously via the `useFonts` hook via expo.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+https://blog.logrocket.com/how-to-add-custom-fonts-react-native/

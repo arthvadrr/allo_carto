@@ -1,5 +1,6 @@
 import { Stack } from "@/node_modules/expo-router";
 import { ThemeProvider } from "@react-navigation/native";
+import { useFonts } from 'expo-font';
 import alloTheme from './alloTheme';
 
 /*
@@ -10,9 +11,21 @@ import alloTheme from './alloTheme';
  * Showing the header literally shows "(tabs)" in the header, 
  * read about the stack component.
  */
-console.log(alloTheme);
+const debug = true;
+
+if (debug) {
+  console.log(alloTheme);
+}
 
 export default function AppLayout() {
+  const [loaded, error] = useFonts({
+    'lexend-variable': require('./assets/fonts/lexend-variable.ttf')
+  })
+
+  if (debug) {
+    console.log(`Loaded: ${loaded ?? 'Error:'}, ${error ?? 'No font error.'}`);
+  }
+
   return (
     <ThemeProvider value={alloTheme}>
       <Stack>
