@@ -22,6 +22,7 @@ export default function DeckView() {
     <View>
       <Text>Learn new words</Text>
       <WordCard word={exampleWord} />
+
     </View>
   )
 }

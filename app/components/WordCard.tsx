@@ -1,7 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, Text, View } from "react-native";
 import { colors } from "../styles";
-import getFillerWords from './util/getFillerWords';
+import filterFillerWords from './util/filterFillerWords';
 
 export interface WordProps {
   id: string;
@@ -47,7 +47,7 @@ export default function WordCard({ word }: WordCardProps) {
   } = wordCardStyles;
 
   console.log('getting articles!')
-  console.log(getFillerWords({ amount: 4, correctWord: 'les' }))
+  console.log(filterFillerWords({ amount: 4, correctWord: 'les' }))
 
   return (
     <View style={wordCard}>

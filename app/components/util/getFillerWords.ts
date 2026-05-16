@@ -1,37 +1,42 @@
-export const articles = ['le', 'la', "l\'", 'les', 'un', 'une', 'des'];
+import filterFillerWords from './filterFillerWords';
 
-interface FillerWordsProps {
-	amount: number;
-	words?: string[];
+interface GetFillerWordsProps {
+	language?: 'french' | 'english';
+	amount?: number;
+	cefrLevel?: string;
 	correctWord: string;
 }
 
-export default function getFillerWords({
-	amount,
-	words = articles,
+function sleep(ms: number) {
+	return new Promise(_ => setTimeout(_, ms));
+}
+
+/**
+ * TODO refactor mock once DB is up
+ *
+ * This function gets filler words for the
+ * user to select from when doing flash cards
+ */
+export default async function getEnglishWords({
+	language = 'english',
+	cefrLevel = 'A1',
+	amount = 4,
 	correctWord,
-}: FillerWordsProps) {
-	let wordsCopy = [...words].filter(word => !(word === correctWord));
+}: GetFillerWordsProps) {
+	const mockWords = [
+		'bonjour',
+		'merci',
+		'oui',
+		'non',
+		'eau',
+		'pain',
+		'maison',
+		'travail',
+		'ami',
+		'manger',
+	];
 
-	if (amount <= wordsCopy.length) {
-		let iterationCount = wordsCopy.length - amount + 1;
-		let max = 50;
-		let safety = 0;
+	await sleep(500);
 
-		while (iterationCount > 0 && safety < max) {
-			let randomPos = Math.floor(Math.random() * wordsCopy.length);
-			safety += 1;
-
-			if (safety === max) {
-				throw new Error('Maximum iterations allowed. See getFillerWords.ts');
-			}
-
-			if (wordsCopy[randomPos] !== 'DELETE') {
-				wordsCopy[randomPos] = 'DELETE';
-				iterationCount -= 1;
-			}
-		}
-	}
-
-	return [...wordsCopy.filter(article => article !== 'DELETE'), correctWord];
+	return filterFillerWords({ amount, correctWord });
 }
