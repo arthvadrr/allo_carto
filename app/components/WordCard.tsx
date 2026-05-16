@@ -1,15 +1,18 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, Text, View } from "react-native";
 import { colors } from "../styles";
+import getFillerArticles from './functions/createArticleArr';
 
 export interface WordProps {
   id: string;
+  translation: string;
   pronunciation: string;
   CEFRLevel: string;
   lemmaId?: string;
-  article?: string;
-  gender?: 'feminine' | 'masculine';
+  frenchArticle?: string;
+  englishArticle?: string;
   tense?: string;
+  gender?: 'feminine' | 'masculine';
   partOfSpeech?: string;
   userScore?: number;
 }
@@ -26,7 +29,10 @@ export default function WordCard({ word }: WordCardProps) {
     id,
     pronunciation,
     CEFRLevel,
-    userScore
+    userScore,
+    frenchArticle,
+    englishArticle,
+    translation
   } = word;
   const {
     wordId,
@@ -35,23 +41,34 @@ export default function WordCard({ word }: WordCardProps) {
     wordCard,
     cardCEFRLevel,
     cardUserScore,
-    cardMain
+    cardMain,
+    answerSlotContainer,
+    answerSlot,
   } = wordCardStyles;
+
+  console.log('getting articles!')
+  console.log(getFillerArticles({ amount: 3, correctArticle: 'le' }))
 
   return (
     <View style={wordCard}>
       <LinearGradient
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
-        colors={[colors.light.primary, colors.dark.background]}
+        colors={[colors.light.primary, colors.dark.border]}
         style={cardGradient}
       >
         <Text style={cardCEFRLevel}>{CEFRLevel}</Text>
         <Text style={cardUserScore}>{userScore}</Text>
       </LinearGradient>
       <View style={cardMain}>
-        <Text style={wordId}>{id}</Text>
+        <Text style={wordId}>{frenchArticle}&nbsp;{id}</Text>
         <Text style={wordPronunciation}>({pronunciation})</Text>
+      </View>
+      <View style={answerSlotContainer}>
+        {englishArticle && (
+          <Text style={answerSlot}>{englishArticle}</Text>
+        )}
+        <Text style={answerSlot}>{translation}</Text>
       </View>
     </View>
   )
@@ -106,5 +123,19 @@ const wordCardStyles = StyleSheet.create({
   },
   wordPronunciation: {
     color: colors.dark.text
+  },
+  answerSlotContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 12,
+    marginBottom: 12
+  },
+  answerSlot: {
+    borderBottomWidth: 2,
+    color: 'transparent',
+    paddingRight: 8,
+    paddingLeft: 8,
+    fontWeight: 500,
+    fontSize: 18
   }
 });

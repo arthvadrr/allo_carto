@@ -6,12 +6,14 @@ import WordCard, { WordProps } from "./components/WordCard";
  */
 const exampleWord: WordProps = {
   id: 'chat',
+  translation: 'cat',
   lemmaId: 'chat',
-  article: 'le',
+  frenchArticle: 'le',
+  englishArticle: 'The',
   partOfSpeech: 'noun',
   CEFRLevel: 'A1',
   gender: 'masculine',
-  pronunciation: 'shaw',
+  pronunciation: 'lay shaw',
   userScore: 12
 }
 
