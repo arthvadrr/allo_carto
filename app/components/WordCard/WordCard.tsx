@@ -1,7 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, Text, View } from "react-native";
-import { colors } from "../styles";
-import filterFillerWords from './util/filterFillerWords';
+import { colors } from "../../styles";
+import filterFillerWords from '../../util/filterFillerWords';
 
 export interface WordProps {
   id: string;

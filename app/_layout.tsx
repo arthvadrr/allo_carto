@@ -3,7 +3,7 @@ import { ThemeProvider } from "@react-navigation/native";
 import { useFonts } from 'expo-font';
 import alloTheme from './alloTheme';
 
-/*
+/**
  * Stack navigator
  * https://docs.expo.dev/router/advanced/stack/
  */

@@ -19,6 +19,7 @@ const tapAudio = require('../assets/sounds/tap.wav');
 
 /**
  * A link that looks like a button
+ * https://reactnative.dev/docs/components-and-apis
  */
 export default function LinkButton({
   screen,
@@ -104,7 +105,6 @@ export default function LinkButton({
 
   return (
     <Animated.View style={animatedButtonStyle}>
-
       <Pressable
         {...allTheProps}
         onHoverIn={() => setIsHovered(true)}

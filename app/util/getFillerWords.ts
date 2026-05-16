@@ -1,6 +1,6 @@
 import filterFillerWords from './filterFillerWords';
 
-interface GetFillerWordsProps {
+export interface GetFillerWordsProps {
 	language?: 'french' | 'english';
 	amount?: number;
 	cefrLevel?: string;
@@ -17,7 +17,7 @@ function sleep(ms: number) {
  * This function gets filler words for the
  * user to select from when doing flash cards
  */
-export default async function getEnglishWords({
+export default async function getFillerWords({
 	language = 'english',
 	cefrLevel = 'A1',
 	amount = 4,
@@ -38,5 +38,5 @@ export default async function getEnglishWords({
 
 	await sleep(500);
 
-	return filterFillerWords({ amount, correctWord });
+	return filterFillerWords({ amount, correctWord, words: mockWords });
 }
