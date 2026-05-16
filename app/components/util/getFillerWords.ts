@@ -1,6 +1,6 @@
 export const articles = ['le', 'la', "l\'", 'les', 'un', 'une', 'des'];
 
-interface getFillerWordsProps {
+interface FillerWordsProps {
 	amount: number;
 	words: string[];
 	correctWord: string;
@@ -10,7 +10,7 @@ export default function getFillerWords({
 	amount,
 	words,
 	correctWord,
-}: getFillerWordsProps) {
+}: FillerWordsProps) {
 	let wordsCopy = [...words].filter(word => !(word === correctWord));
 
 	if (amount <= wordsCopy.length) {
