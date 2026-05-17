@@ -1,10 +1,27 @@
 import { View } from 'react-native';
-import CardContainer from "./CardContainer";
+import type { WordProps } from './components/WordCard/WordCard';
+import WordCardContainer from "./components/WordCard/WordCardContainer";
+
+/**
+ * TODO remove
+ */
+const mockWord: WordProps = {
+  id: 'chat',
+  translation: 'cat',
+  lemmaId: 'chat',
+  frenchArticle: 'le',
+  englishArticle: 'The',
+  partOfSpeech: 'noun',
+  CEFRLevel: 'A1',
+  gender: 'masculine',
+  pronunciation: 'lay shaw',
+  userScore: 12
+}
 
 export default function DeckView() {
   return (
     <View>
-      <CardContainer />
+      <WordCardContainer word={mockWord} />
     </View>
   )
 }

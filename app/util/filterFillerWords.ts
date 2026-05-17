@@ -1,4 +1,5 @@
-export const articles = ['le', 'la', "l\'", 'les', 'un', 'une', 'des'];
+export const frenchArticles = ['le', 'la', "l\'", 'les', 'un', 'une', 'des'];
+export const englishArticles = ['the', 'a', 'an'];
 
 interface FilterFillerWordsProps {
 	amount: number;
@@ -8,10 +9,12 @@ interface FilterFillerWordsProps {
 
 export default function filterFillerWords({
 	amount,
-	words = articles,
+	words = englishArticles,
 	correctWord,
 }: FilterFillerWordsProps) {
-	let wordsCopy = [...words].filter(word => !(word === correctWord));
+	let wordsCopy = [...words].filter(
+		word => !(word.toLowerCase() === correctWord.toLowerCase()),
+	);
 
 	if (amount <= wordsCopy.length) {
 		let iterationCount = wordsCopy.length - amount + 1;

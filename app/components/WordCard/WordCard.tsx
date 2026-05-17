@@ -1,7 +1,9 @@
 import { LinearGradient } from 'expo-linear-gradient';
+import { useContext } from 'react';
 import { StyleSheet, Text, View } from "react-native";
 import { colors } from "../../styles";
 import filterFillerWords from '../../util/filterFillerWords';
+import { CardContext } from './cardContext';
 
 export interface WordProps {
   id: string;
@@ -49,6 +51,29 @@ export default function WordCard({ word }: WordCardProps) {
   console.log('getting articles!')
   console.log(filterFillerWords({ amount: 4, correctWord: 'les' }))
 
+  const { setCardState } = useContext(CardContext);
+
+  /**
+   * To "move" the user's selected article or word
+   * to the card slots we need to store their positions (layout)
+   * on the view.
+   */
+  const setArticleSlotPos = (e: any) => {
+    const layout = e.nativeEvent.layout;
+
+    setCardState(cardState => {
+      return ({ ...cardState, articlePosition: layout })
+    })
+  }
+
+  const setWordSlotPos = (e: any) => {
+    const layout = e.nativeEvent.layout;
+
+    setCardState(cardState => {
+      return ({ ...cardState, wordPosition: layout })
+    })
+  }
+
   return (
     <View style={wordCard}>
       <LinearGradient
@@ -66,9 +91,9 @@ export default function WordCard({ word }: WordCardProps) {
       </View>
       <View style={answerSlotContainer}>
         {englishArticle && (
-          <Text style={answerSlot}>{englishArticle}</Text>
+          <Text style={answerSlot} onLayout={e => setArticleSlotPos(e)}>{englishArticle}</Text>
         )}
-        <Text style={answerSlot}>{translation}</Text>
+        <Text style={answerSlot} onLayout={e => setWordSlotPos(e)}>{translation}</Text>
       </View>
     </View>
   )

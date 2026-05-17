@@ -5,7 +5,21 @@ export interface GetFillerWordsProps {
 	amount?: number;
 	cefrLevel?: string;
 	correctWord: string;
+	words?: string[];
 }
+
+const mockWords = [
+	'bonjour',
+	'merci',
+	'oui',
+	'non',
+	'eau',
+	'pain',
+	'maison',
+	'travail',
+	'ami',
+	'manger',
+];
 
 function sleep(ms: number) {
 	return new Promise(_ => setTimeout(_, ms));
@@ -22,21 +36,9 @@ export default async function getFillerWords({
 	cefrLevel = 'A1',
 	amount = 4,
 	correctWord,
+	words = mockWords,
 }: GetFillerWordsProps) {
-	const mockWords = [
-		'bonjour',
-		'merci',
-		'oui',
-		'non',
-		'eau',
-		'pain',
-		'maison',
-		'travail',
-		'ami',
-		'manger',
-	];
-
 	await sleep(500);
 
-	return filterFillerWords({ amount, correctWord, words: mockWords });
+	return filterFillerWords({ amount, correctWord, words });
 }

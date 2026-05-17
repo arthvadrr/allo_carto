@@ -60,7 +60,7 @@ export default function LinkButton({
    * Animation vars
    */
   const top = useSharedValue(0);
-  const boxShadow = useSharedValue(`8px 8px 0 0 ${colors.dark.border}`);
+  const boxShadow = useSharedValue(`0 8px 0 0 ${colors.dark.border}`);
 
   const animatedButtonStyle = useAnimatedStyle(() => ({
     top: top.value,
@@ -89,7 +89,7 @@ export default function LinkButton({
 
   function handlePressOut() {
     top.value = 0;
-    boxShadow.value = `8px 8px 0 0 ${colors.dark.border}`;
+    boxShadow.value = `0 8px 0 0 ${colors.dark.border}`;
     setIsPressed(false);
   }
 
