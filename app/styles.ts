@@ -72,6 +72,10 @@ const styles = StyleSheet.create<Classes>({
 		borderWidth: 2,
 		padding: 14,
 		gap: 16,
+		shadowColor: colors.light.border,
+		shadowOffset: { width: 0, height: 8 },
+		shadowOpacity: 0.2,
+		shadowRadius: 0,
 	},
 	hoveredLinkButton: {
 		borderRadius: 4,
