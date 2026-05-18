@@ -16,7 +16,7 @@ interface WordCardSelectionProps {
  * WordCardSelection Component
  */
 export default function WordCardSelection({ articleWords, fillerWords }: WordCardSelectionProps) {
-  const { cardState, setCardState } = useContext(CardContext);
+  const { setCardState } = useContext(CardContext);
 
   const {
     wcsContainer,
@@ -24,35 +24,36 @@ export default function WordCardSelection({ articleWords, fillerWords }: WordCar
     wcsText
   } = wordCardSelectionStyles;
 
-  const handleArticlePress = (word: string) => {
+  const handleArticlePressToggle = (word: string) => {
     setCardState((cardState) => {
-      return ({ ...cardState, selectedArticle: word })
+      if (word !== cardState.selectedArticle) {
+        return ({ ...cardState, selectedArticle: word })
+      } else {
+        return ({ ...cardState, selectedArticle: null })
+      }
     });
 
-    console.log(cardState);
   }
 
-  const handleWordPress = (word: string) => {
+  const handleWordPressToggle = (word: string) => {
     setCardState((cardState) => {
-      return ({ ...cardState, selectedWord: word })
+      if (word !== cardState.selectedWord) {
+        return ({ ...cardState, selectedWord: word })
+      } else {
+        return ({ ...cardState, selectedWord: null })
+      }
     });
   }
-
-  console.log('article position', cardState.articlePosition);
 
   return (
     <View style={wcsContainer}>
       {articleWords.map((article: string) => (
         <Animated.View
           key={article}
-          style={cardState.selectedArticle === article ? {
-            position: 'absolute',
-
-          } : {}}
         >
           <Pressable
             style={wcsButton}
-            onPress={() => handleArticlePress(article)}
+            onPress={() => handleArticlePressToggle(article)}
           >
             <Text style={wcsText}>{article}</Text>
           </Pressable>
@@ -62,7 +63,7 @@ export default function WordCardSelection({ articleWords, fillerWords }: WordCar
         <Pressable
           key={word}
           style={wcsButton}
-          onPress={() => handleWordPress(word)}
+          onPress={() => handleWordPressToggle(word)}
         >
           <Text style={wcsText}>{word}</Text>
         </Pressable>
@@ -76,6 +77,7 @@ export default function WordCardSelection({ articleWords, fillerWords }: WordCar
  */
 const wordCardSelectionStyles = StyleSheet.create({
   wcsContainer: {
+    position: 'static',
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 16,

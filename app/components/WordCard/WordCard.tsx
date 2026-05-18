@@ -1,5 +1,5 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from "react-native";
 import { colors } from "../../styles";
 import { CardContext } from './cardContext';
@@ -49,28 +49,17 @@ export default function WordCard({ word }: WordCardProps) {
     answerSlotContainer,
     answerSlot,
   } = wordCardStyles;
-  const { setCardState } = useContext(CardContext);
+  const { cardState } = useContext(CardContext);
+  const [articleClass, setArticleClass] = useState({});
+  const [wordClass, setWordClass] = useState({});
 
   /**
-   * To "move" the user's selected article or word
-   * to the card slots we need to store their positions (layout)
-   * on the view.
+   * When the selected article/word changes, display that
    */
-  const setArticleSlotPos = (e: any) => {
-    const layout = e.nativeEvent.layout;
-
-    setCardState(cardState => {
-      return ({ ...cardState, articlePosition: layout })
-    })
-  }
-
-  const setWordSlotPos = (e: any) => {
-    const layout = e.nativeEvent.layout;
-
-    setCardState(cardState => {
-      return ({ ...cardState, wordPosition: layout })
-    })
-  }
+  useEffect(() => {
+    setArticleClass({ color: cardState.selectedArticle ? colors.dark.text : 'transparent' });
+    setWordClass({ color: cardState.selectedWord ? colors.dark.text : 'transparent' });
+  }, [cardState.selectedArticle, cardState.selectedWord]);
 
   return (
     <View style={wordCard}>
@@ -89,9 +78,13 @@ export default function WordCard({ word }: WordCardProps) {
       </View>
       <View style={answerSlotContainer}>
         {englishArticle && (
-          <Text style={answerSlot} onLayout={e => setArticleSlotPos(e)}>{englishArticle}</Text>
+          <Text style={[answerSlot, articleClass]}>
+            {cardState.selectedArticle ?? englishArticle ?? ''}
+          </Text>
         )}
-        <Text style={answerSlot} onLayout={e => setWordSlotPos(e)}>{translation}</Text>
+        <Text style={[answerSlot, wordClass]}>
+          {cardState.selectedWord ?? translation ?? ''}
+        </Text>
       </View>
     </View>
   )

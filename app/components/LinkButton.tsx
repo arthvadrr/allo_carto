@@ -69,6 +69,7 @@ export default function LinkButton({
    */
   const top = useSharedValue(0);
   const boxShadow = useSharedValue(`0 8px 0 0 ${colors.dark.border}`);
+
   const animatedButtonStyle = useAnimatedStyle(() => ({
     top: top.value,
     boxShadow: boxShadow.value,
