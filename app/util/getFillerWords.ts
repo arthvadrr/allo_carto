@@ -9,16 +9,16 @@ export interface GetFillerWordsProps {
 }
 
 const mockWords = [
-	'bonjour',
-	'merci',
-	'oui',
-	'non',
-	'eau',
-	'pain',
-	'maison',
-	'travail',
-	'ami',
-	'manger',
+	'hello',
+	'thank you',
+	'yes',
+	'no',
+	'water',
+	'bread',
+	'house',
+	'work',
+	'friend',
+	'eat',
 ];
 
 export function sleep(ms: number) {
@@ -34,11 +34,11 @@ export function sleep(ms: number) {
 export default async function getFillerWords({
 	language = 'english',
 	cefrLevel = 'A1',
-	amount = 4,
+	amount = 6,
 	correctWord,
 	words = mockWords,
 }: GetFillerWordsProps) {
-	await sleep(500);
+	await sleep(10);
 
 	return filterFillerWords({ amount, correctWord, words });
 }

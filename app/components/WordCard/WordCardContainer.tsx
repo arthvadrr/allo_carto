@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Pressable, Text, View } from "react-native";
 import { englishArticles } from "../../util/filterFillerWords";
 import getFillerWords from "../../util/getFillerWords";
-import WordCardSelection from "./_WordCardSelection";
 import { CardContext, type CardStateProps, initialCardState } from "./cardContext";
 import WordCard, { WordProps } from "./WordCard";
+import WordCardSelection from "./WordCardSelection";
 
 /**
  * Typing

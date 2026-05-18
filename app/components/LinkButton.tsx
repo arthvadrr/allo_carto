@@ -80,14 +80,14 @@ export default function LinkButton({
    * Action handlers
    */
   function handlePressIn() {
-    top.value = withTiming(4, {
+    top.value = withTiming(6, {
       duration: 120,
       easing: Easing.inOut(Easing.quad),
     });
 
     boxShadow.value = withTiming(`0px 0px 0 0 ${colors.dark.border}`, {
-      duration: 60,
-      easing: Easing.out(Easing.quad),
+      duration: 120,
+      easing: Easing.inOut(Easing.quad),
     });
 
     setIsPressed(true);
