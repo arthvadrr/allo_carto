@@ -2,9 +2,11 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useContext } from 'react';
 import { StyleSheet, Text, View } from "react-native";
 import { colors } from "../../styles";
-import filterFillerWords from '../../util/filterFillerWords';
 import { CardContext } from './cardContext';
 
+/**
+ * Typing
+ */
 export interface WordProps {
   id: string;
   translation: string;
@@ -24,7 +26,7 @@ interface WordCardProps {
 }
 
 /**
- * Component
+ * WordCard Component
  */
 export default function WordCard({ word }: WordCardProps) {
   const {
@@ -47,10 +49,6 @@ export default function WordCard({ word }: WordCardProps) {
     answerSlotContainer,
     answerSlot,
   } = wordCardStyles;
-
-  console.log('getting articles!')
-  console.log(filterFillerWords({ amount: 4, correctWord: 'les' }))
-
   const { setCardState } = useContext(CardContext);
 
   /**

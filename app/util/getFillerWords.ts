@@ -21,7 +21,7 @@ const mockWords = [
 	'manger',
 ];
 
-function sleep(ms: number) {
+export function sleep(ms: number) {
 	return new Promise(_ => setTimeout(_, ms));
 }
 

@@ -13,6 +13,12 @@ if (debug) {
   console.log(alloTheme);
 }
 
+/**
+ * AppLayout Component
+ * 
+ * "Off we go again."
+ * - Vladimir, Waiting for Godot
+ */
 export default function AppLayout() {
   const [loaded, error] = useFonts({
     'lexend-variable': require('./assets/fonts/lexend-variable.ttf')

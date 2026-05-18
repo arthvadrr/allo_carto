@@ -6,10 +6,16 @@ import WordCardSelection from "./_WordCardSelection";
 import { CardContext, type CardStateProps, initialCardState } from "./cardContext";
 import WordCard, { WordProps } from "./WordCard";
 
+/**
+ * Typing
+ */
 interface CardContainerProps {
   word: WordProps
 }
 
+/**
+ * WordCardContainer Component
+ */
 export default function WordCardContainer({ word }: CardContainerProps) {
   const [fillerWords, setFillerWords] = useState<string[]>([]);
   const [articleWords, setArticleWords] = useState<string[]>([]);

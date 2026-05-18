@@ -6,6 +6,15 @@ import { Pressable, Text } from 'react-native';
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import styles, { colors } from '../styles';
 
+
+/**
+ * Audio Import
+ */
+const tapAudio = require('../assets/sounds/tap.wav');
+
+/**
+ * Typing
+ */
 interface LinkButtonProps {
   screen: string;
   params: LinkProps;
@@ -15,9 +24,8 @@ interface LinkButtonProps {
   children?: ReactNode;
 }
 
-const tapAudio = require('../assets/sounds/tap.wav');
-
 /**
+ * LinkButton Component
  * A link that looks like a button
  * https://reactnative.dev/docs/components-and-apis
  */
@@ -61,7 +69,6 @@ export default function LinkButton({
    */
   const top = useSharedValue(0);
   const boxShadow = useSharedValue(`0 8px 0 0 ${colors.dark.border}`);
-
   const animatedButtonStyle = useAnimatedStyle(() => ({
     top: top.value,
     boxShadow: boxShadow.value,

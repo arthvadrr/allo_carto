@@ -1,15 +1,22 @@
 import { colors } from '@/app/styles';
 import { useContext } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { CardContext } from './cardContext';
 
+/**
+ * Typing
+ */
 interface WordCardSelectionProps {
   articleWords: string[];
   fillerWords: string[];
 }
 
+/**
+ * WordCardSelection Component
+ */
 export default function WordCardSelection({ articleWords, fillerWords }: WordCardSelectionProps) {
-  const { setCardState } = useContext(CardContext);
+  const { cardState, setCardState } = useContext(CardContext);
 
   const {
     wcsContainer,
@@ -20,25 +27,36 @@ export default function WordCardSelection({ articleWords, fillerWords }: WordCar
   const handleArticlePress = (word: string) => {
     setCardState((cardState) => {
       return ({ ...cardState, selectedArticle: word })
-    })
+    });
+
+    console.log(cardState);
   }
 
   const handleWordPress = (word: string) => {
     setCardState((cardState) => {
       return ({ ...cardState, selectedWord: word })
-    })
+    });
   }
+
+  console.log('article position', cardState.articlePosition);
 
   return (
     <View style={wcsContainer}>
       {articleWords.map((article: string) => (
-        <Pressable
+        <Animated.View
           key={article}
-          style={wcsButton}
-          onPress={() => handleArticlePress(article)}
+          style={cardState.selectedArticle === article ? {
+            position: 'absolute',
+
+          } : {}}
         >
-          <Text style={wcsText}>{article}</Text>
-        </Pressable>
+          <Pressable
+            style={wcsButton}
+            onPress={() => handleArticlePress(article)}
+          >
+            <Text style={wcsText}>{article}</Text>
+          </Pressable>
+        </Animated.View>
       ))}
       {fillerWords.map((word: string) => (
         <Pressable
@@ -53,6 +71,9 @@ export default function WordCardSelection({ articleWords, fillerWords }: WordCar
   )
 }
 
+/**
+ * Styles
+ */
 const wordCardSelectionStyles = StyleSheet.create({
   wcsContainer: {
     flexDirection: 'row',
