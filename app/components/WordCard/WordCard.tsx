@@ -48,10 +48,13 @@ export default function WordCard({ word }: WordCardProps) {
     wordId,
     wordPronunciation,
     cardGradient,
+    wordCardContainer,
     wordCard,
     cardCEFRLevel,
     cardUserScore,
     cardMain,
+    cardFront,
+    cardBack,
     answerSlotContainer,
     answerSlot,
     hiddenMeasureText,
@@ -94,51 +97,56 @@ export default function WordCard({ word }: WordCardProps) {
   };
 
   return (
-    <View style={wordCard}>
-      <LinearGradient
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-        colors={[colors.light.primary, colors.dark.border]}
-        style={cardGradient}
-      >
-        <Text style={cardCEFRLevel}>{CEFRLevel}</Text>
-        <Text style={cardUserScore}>{userScore}</Text>
-      </LinearGradient>
-      <View style={cardMain}>
-        <Text style={wordId}>{frenchArticle}&nbsp;{id}</Text>
-        <Text style={wordPronunciation}>({pronunciation})</Text>
+    <View style={wordCardContainer}>
+      <View style={[wordCard, cardFront]}>
+        <LinearGradient
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          colors={[colors.light.primary, colors.dark.border]}
+          style={cardGradient}
+        >
+          <Text style={cardCEFRLevel}>{CEFRLevel}</Text>
+          <Text style={cardUserScore}>{userScore}</Text>
+        </LinearGradient>
+        <View style={cardMain}>
+          <Text style={wordId}>{frenchArticle}&nbsp;{id}</Text>
+          <Text style={wordPronunciation}>({pronunciation})</Text>
+        </View>
+        <View style={answerSlotContainer}>
+          {englishArticle && (
+            <>
+              <Text
+                numberOfLines={1}
+                onLayout={handleArticleWidth}
+                style={[answerSlot, hiddenMeasureText]}
+              >
+                {displayedArticle}
+              </Text>
+              <Animated.Text
+                numberOfLines={1}
+                style={[answerSlot, articleClass, articleWidthStyle]}
+              >
+                {displayedArticle}
+              </Animated.Text>
+            </>
+          )}
+          <Text
+            numberOfLines={1}
+            onLayout={handleWordWidth}
+            style={[answerSlot, hiddenMeasureText]}
+          >
+            {displayedWord}
+          </Text>
+          <Animated.Text
+            numberOfLines={1}
+            style={[answerSlot, wordClass, wordWidthStyle]}
+          >
+            {displayedWord}
+          </Animated.Text>
+        </View>
       </View>
-      <View style={answerSlotContainer}>
-        {englishArticle && (
-          <>
-            <Text
-              numberOfLines={1}
-              onLayout={handleArticleWidth}
-              style={[answerSlot, hiddenMeasureText]}
-            >
-              {displayedArticle}
-            </Text>
-            <Animated.Text
-              numberOfLines={1}
-              style={[answerSlot, articleClass, articleWidthStyle]}
-            >
-              {displayedArticle}
-            </Animated.Text>
-          </>
-        )}
-        <Text
-          numberOfLines={1}
-          onLayout={handleWordWidth}
-          style={[answerSlot, hiddenMeasureText]}
-        >
-          {displayedWord}
-        </Text>
-        <Animated.Text
-          numberOfLines={1}
-          style={[answerSlot, wordClass, wordWidthStyle]}
-        >
-          {displayedWord}
-        </Animated.Text>
+      <View style={[wordCard, cardBack]}>
+        <Text>CARD BACK</Text>
       </View>
     </View>
   )
@@ -148,13 +156,38 @@ export default function WordCard({ word }: WordCardProps) {
  * Styles
  */
 const wordCardStyles = StyleSheet.create({
-  wordCard: {
-    backgroundColor: colors.light.background,
+  wordCardContainer: {
+    position: 'relative',
+    display: 'flex',
+    margin: 24,
+    borderRadius: 8,
     alignContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 24,
+  },
+  wordCard: {
+    display: 'flex',
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    backgroundColor: colors.light.background,
     borderRadius: 8,
+  },
+  cardFront: {
+    transform: [
+      { perspective: 1000 },
+      { rotateY: '0deg' }
+    ]
+  },
+  cardBack: {
+    backgroundColor: colors.light.border,
+    height: '100%',
+    transform: [
+      {
+        rotateY: '180deg'
+      }
+    ]
   },
   cardGradient: {
     alignContent: 'space-between',
