@@ -1,7 +1,7 @@
 import DeckView from "../components/Deck/DeckView";
 
 /**
- * A route wrapper
+ * Deck view - A route wrapper in (routes)
  */
 export default function Deck() {
   return <DeckView />

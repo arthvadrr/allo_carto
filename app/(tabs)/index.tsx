@@ -4,7 +4,9 @@ import LinkCard from '../components/LinkCard';
 import SVGCards from '../components/SVG/SVGCards';
 import styles, { colors } from '../styles';
 
-
+/**
+ * HomeScreen view - Index of the (tabs) dir routes 
+ */
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
