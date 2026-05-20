@@ -10,7 +10,7 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <StatusBar style="light" />
       <LinkCard
-        screen="deck"
+        screen="(routes)/deck"
         title="Learn more words!"
         linkText="Review a deck →"
         description="Generate a deck of new words to work on"
