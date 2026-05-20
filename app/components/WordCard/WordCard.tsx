@@ -1,6 +1,6 @@
 import { useContext, useEffect, useMemo } from 'react';
-import { type LayoutChangeEvent, StyleSheet, Text, View } from "react-native";
-import Animated, {
+import { type LayoutChangeEvent, StyleSheet, View } from "react-native";
+import {
   Easing,
   useAnimatedStyle,
   useSharedValue,
@@ -8,6 +8,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { colors } from "../../styles";
 import { CardContext } from './cardContext';
+import WordCardBack from './WordCardBack';
 import WordCardFront from './WordCardFront';
 
 /**
@@ -40,10 +41,7 @@ interface WordCardProps {
  * answer.
  */
 export default function WordCard({ word }: WordCardProps) {
-  const {
-    wordCardContainer,
-    cardBack,
-  } = wordCardStyles;
+  const { wordCardContainer } = wordCardStyles;
   const { cardState } = useContext(CardContext);
 
   /**
@@ -111,12 +109,10 @@ export default function WordCard({ word }: WordCardProps) {
         wordWidthStyle={wordWidthStyle}
         wordCardFrontFlippedStyle={wordCardFrontFlippedStyle}
       />
-      <Animated.View style={[
-        cardBack,
-        wordCardBackFlippedStyle
-      ]}>
-        <Text>CARD BACK</Text>
-      </Animated.View>
+      <WordCardBack
+        word={word}
+        wordCardBackFlippedStyle={wordCardBackFlippedStyle}
+      />
     </View>
   )
 }
@@ -145,6 +141,11 @@ const wordCardStyles = StyleSheet.create({
   },
 });
 
+/**
+ * Shared style - front and back of cards
+ * 
+ * Shared child styles will always live on the first shared parent
+ */
 export const wordCardInnerStyles = StyleSheet.create({
   wordCardInner: {
     display: 'flex',
