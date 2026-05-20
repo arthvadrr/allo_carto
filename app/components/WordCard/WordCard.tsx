@@ -110,12 +110,9 @@ export default function WordCard({ word }: WordCardProps) {
     ]
   }))
 
-  useEffect(() => {
-    flipDegrees.value = withTiming(cardState.isCorrect ? 180 : 0, flipTiming);
-  }, [cardState.isCorrect, flipDegrees, flipTiming])
-
   /**
    * Handle setting the animated width of the selected word/article
+   * And the flip
    */
   const handleArticleWidth = (event: LayoutChangeEvent) => {
     articleWidth.value = withTiming(event.nativeEvent.layout.width, timing);
@@ -124,6 +121,10 @@ export default function WordCard({ word }: WordCardProps) {
   const handleWordWidth = (event: LayoutChangeEvent) => {
     wordWidth.value = withTiming(event.nativeEvent.layout.width, timing);
   };
+
+  useEffect(() => {
+    flipDegrees.value = withTiming(cardState.isCorrect ? 180 : 0, flipTiming);
+  }, [cardState.isCorrect, flipDegrees, flipTiming])
 
   return (
     <View style={wordCardContainer}>
