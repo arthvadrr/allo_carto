@@ -1,5 +1,5 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { useContext, useMemo } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import { type LayoutChangeEvent, StyleSheet, Text, View } from "react-native";
 import Animated, {
   Easing,
@@ -33,6 +33,11 @@ interface WordCardProps {
 
 /**
  * WordCard Component
+ * 
+ * I couldn't get the container to flip on its
+ * own to do both front and back at the same time,
+ * so these are done individually on a correct
+ * answer.
  */
 export default function WordCard({ word }: WordCardProps) {
   const {
@@ -60,6 +65,7 @@ export default function WordCard({ word }: WordCardProps) {
     hiddenMeasureText,
   } = wordCardStyles;
   const { cardState } = useContext(CardContext);
+
   const displayedArticle = cardState.selectedArticle ?? englishArticle ?? '';
   const displayedWord = cardState.selectedWord ?? translation ?? '';
   const articleClass = { color: cardState.selectedArticle ? colors.dark.text : 'transparent' };
@@ -70,10 +76,16 @@ export default function WordCard({ word }: WordCardProps) {
    */
   const articleWidth = useSharedValue(0);
   const wordWidth = useSharedValue(0);
+  const flipDegrees = useSharedValue(0);
 
   const timing = useMemo(() => ({
     duration: 120,
     easing: Easing.inOut(Easing.ease)
+  }), []);
+
+  const flipTiming = useMemo(() => ({
+    duration: 450,
+    easing: Easing.inOut(Easing.cubic)
   }), []);
 
   const articleWidthStyle = useAnimatedStyle(() => ({
@@ -84,6 +96,23 @@ export default function WordCard({ word }: WordCardProps) {
     width: wordWidth.value
   }));
 
+  const wordCardFrontFlipped = useAnimatedStyle(() => ({
+    transform: [
+      { perspective: 1000 },
+      { rotateY: `-${flipDegrees.value}deg` }
+    ]
+  }))
+
+  const wordCardBackFlipped = useAnimatedStyle(() => ({
+    transform: [
+      { perspective: 1000 },
+      { rotateY: `-${180 + flipDegrees.value}deg` }
+    ]
+  }))
+
+  useEffect(() => {
+    flipDegrees.value = withTiming(cardState.isCorrect ? 180 : 0, flipTiming);
+  }, [cardState.isCorrect, flipDegrees, flipTiming])
 
   /**
    * Handle setting the animated width of the selected word/article
@@ -98,7 +127,7 @@ export default function WordCard({ word }: WordCardProps) {
 
   return (
     <View style={wordCardContainer}>
-      <View style={[wordCard, cardFront]}>
+      <Animated.View style={[wordCard, cardFront, wordCardFrontFlipped]}>
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
@@ -144,10 +173,10 @@ export default function WordCard({ word }: WordCardProps) {
             {displayedWord}
           </Animated.Text>
         </View>
-      </View>
-      <View style={[wordCard, cardBack]}>
+      </Animated.View>
+      <Animated.View style={[wordCard, cardBack, wordCardBackFlipped]}>
         <Text>CARD BACK</Text>
-      </View>
+      </Animated.View>
     </View>
   )
 }
@@ -157,8 +186,6 @@ export default function WordCard({ word }: WordCardProps) {
  */
 const wordCardStyles = StyleSheet.create({
   wordCardContainer: {
-    position: 'relative',
-    display: 'flex',
     margin: 24,
     borderRadius: 8,
     alignContent: 'center',
@@ -170,23 +197,26 @@ const wordCardStyles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    position: 'absolute',
     backgroundColor: colors.light.background,
     borderRadius: 8,
   },
   cardFront: {
+    zIndex: 1,
+    backfaceVisibility: 'hidden',
     transform: [
       { perspective: 1000 },
       { rotateY: '0deg' }
     ]
   },
   cardBack: {
+    ...StyleSheet.absoluteFillObject,
     backgroundColor: colors.light.border,
+    zIndex: 10,
     height: '100%',
+    backfaceVisibility: 'hidden',
     transform: [
-      {
-        rotateY: '180deg'
-      }
+      { perspective: 1000 },
+      { rotateY: '180deg' }
     ]
   },
   cardGradient: {
