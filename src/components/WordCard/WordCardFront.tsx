@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { type LayoutChangeEvent, StyleSheet, Text, type TextStyle, View, type ViewStyle } from "react-native";
 import type { AnimatedStyle } from "react-native-reanimated";
 import Animated from "react-native-reanimated";
-import { sharedWordCardStyles } from "./WordCard";
+import { sharedWordCardStyles } from "./sharedWordCardStyles";
 import { FEEDBACK_TEXT_FRONT, WordCardContext } from "./wordCardContext";
 
 /**

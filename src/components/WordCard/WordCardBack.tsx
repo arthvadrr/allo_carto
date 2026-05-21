@@ -3,7 +3,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useContext } from "react";
 import { type ViewStyle, StyleSheet, Text, TextStyle, View } from "react-native";
 import Animated, { type AnimatedStyle } from "react-native-reanimated";
-import { sharedWordCardStyles } from "./WordCard";
+import { sharedWordCardStyles } from "./sharedWordCardStyles";
 import { FEEDBACK_TEXT_BACK, WordCardContext } from "./wordCardContext";
 
 /**

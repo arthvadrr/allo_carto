@@ -105,7 +105,10 @@ export default function WordCardButton({
    * Check the user's answer
    */
   const checkAnswer = useCallback(() => {
-    if (cardState.stage === 'READY') {
+    if (
+      cardState.stage === 'READY' ||
+      cardState.stage === 'FINAL'
+    ) {
       /**
        * Determine if there was a mistake
        */
