@@ -202,10 +202,10 @@ export const sharedWordCardStyles = StyleSheet.create({
   cardMain: {
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 24,
+    padding: 18,
     paddingRight: 8,
     paddingLeft: 8,
-    marginTop: 8,
+    marginTop: 16,
     gap: 8,
   },
   wordId: {
@@ -233,10 +233,9 @@ export const sharedWordCardStyles = StyleSheet.create({
   },
   feedbackText: {
     padding: 4,
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 600,
-    marginTop: 8,
-    marginBottom: 8,
+    margin: 14,
     color: colors.dark.success
   }
 })
