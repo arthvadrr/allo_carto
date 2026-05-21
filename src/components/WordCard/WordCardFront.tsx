@@ -34,17 +34,21 @@ export default function WordCardFront({
    * Destructure Styles
    */
   const {
+    cardFront,
+    hiddenMeasureText,
+  } = wordCardFrontStyles;
+
+  const {
     wordId,
     wordPronunciation,
     cardGradient,
     cardCEFRLevel,
     cardUserScore,
     cardMain,
-    cardFront,
     answerSlotContainer,
     answerSlot,
-    hiddenMeasureText,
-  } = wordCardFrontStyles;
+    feedbackContainer
+  } = sharedWordCardStyles;
 
   /**
    * Word data
@@ -121,6 +125,9 @@ export default function WordCardFront({
           {displayedWord}
         </Animated.Text>
       </View>
+      <View style={feedbackContainer}>
+
+      </View>
     </Animated.View>
   )
 }
@@ -136,59 +143,6 @@ export const wordCardFrontStyles = StyleSheet.create({
       { perspective: 1000 },
       { rotateY: '0deg' }
     ]
-  },
-  cardGradient: {
-    alignContent: 'space-between',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    width: '100%',
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
-    padding: 4,
-    paddingRight: 8,
-    paddingLeft: 8,
-    gap: 4,
-  },
-  cardCEFRLevel: {
-    color: colors.dark.text,
-    fontSize: 16,
-    fontWeight: '700',
-  },
-  cardUserScore: {
-    color: colors.light.text,
-    fontSize: 16,
-    fontWeight: '700',
-  },
-  cardMain: {
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 24,
-    paddingRight: 8,
-    paddingLeft: 8,
-  },
-  wordId: {
-    color: colors.dark.text,
-    fontSize: 24,
-    fontWeight: '700',
-  },
-  wordPronunciation: {
-    fontSize: 18,
-    color: colors.dark.text
-  },
-  answerSlotContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 12,
-    marginBottom: 12
-  },
-  answerSlot: {
-    borderBottomWidth: 2,
-    color: 'transparent',
-    paddingRight: 8,
-    paddingLeft: 8,
-    fontWeight: 500,
-    fontSize: 18
   },
   hiddenMeasureText: {
     position: 'absolute',

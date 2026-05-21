@@ -17,6 +17,17 @@ export interface WordProps {
 	userScore?: number;
 }
 
+export const FEEDBACK_TEXT = {
+	READY_PENDING_NONE: '',
+	CORRECT_SUCCESS_NONE: 'Correct! Great Job!',
+	COMPLETED_FAILED_ARTICLE: 'That is the wrong article!',
+	COMPLETED_FAILED_WORD: 'That is the wrong word!',
+	COMPLETED_FAILED_BOTH: 'Both are wrong!',
+	READY_PENDING_ARTICLE: 'The article is incorrect!',
+	READY_PENDING_WORD: 'The word is incorrect!',
+	READY_PENDING_BOTH: 'Both are incorrect!',
+};
+
 export type CardStage = 'READY' | 'CORRECT' | 'COMPLETED';
 export type CardProgress = 'PENDING' | 'SUCCESS' | 'FAILED';
 export type CardMistake = 'NONE' | 'ARTICLE' | 'WORD' | 'BOTH';
