@@ -1,10 +1,10 @@
 import { colors } from "@/src/app/styles";
 import { LinearGradient } from "expo-linear-gradient";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { type ViewStyle, StyleSheet, Text, View } from "react-native";
 import Animated, { type AnimatedStyle } from "react-native-reanimated";
 import { sharedWordCardStyles } from "./WordCard";
-import { WordCardContext } from "./wordCardContext";
+import { FEEDBACK_TEXT_BACK, WordCardContext } from "./wordCardContext";
 
 /**
  * Typing
@@ -20,7 +20,6 @@ export default function WordCardBack({
   wordCardBackFlippedStyle
 }: WordCardBackProps) {
   const { cardState } = useContext(WordCardContext);
-  const [cardStyleState, setCardStyleState] = useState({});
 
   /**
    * Destructure Styles
@@ -39,7 +38,6 @@ export default function WordCardBack({
     cardMain,
     answerSlotContainer,
     answerSlot,
-    feedbackContainer,
     feedbackText
   } = sharedWordCardStyles;
 
@@ -94,8 +92,8 @@ export default function WordCardBack({
           {translation}
         </Text>
       </View>
-      <View style={feedbackContainer}>
-        <Text style={feedbackText}>Feedback</Text>
+      <View>
+        <Text style={feedbackText}>{FEEDBACK_TEXT_BACK[cardState.feedback]}</Text>
       </View>
     </Animated.View>
   )
@@ -121,7 +119,7 @@ const wordCardBackStyles = StyleSheet.create({
   answerSlotBack: {
     color: colors.dark.success,
     backgroundColor: colors.light.success,
-    boxShadow: `0 8px 8px 0 ${colors.light.border}`,
+    boxShadow: `0 4px 4px 0 ${colors.light.border}`,
     borderTopWidth: 2,
     borderTopColor: colors.dark.success,
   }

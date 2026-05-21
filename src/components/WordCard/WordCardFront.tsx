@@ -5,7 +5,7 @@ import { type LayoutChangeEvent, StyleSheet, Text, type TextStyle, View, type Vi
 import type { AnimatedStyle } from "react-native-reanimated";
 import Animated from "react-native-reanimated";
 import { sharedWordCardStyles } from "./WordCard";
-import { WordCardContext } from "./wordCardContext";
+import { FEEDBACK_TEXT_FRONT, WordCardContext } from "./wordCardContext";
 
 /**
  * Typing
@@ -47,7 +47,7 @@ export default function WordCardFront({
     cardMain,
     answerSlotContainer,
     answerSlot,
-    feedbackContainer
+    feedbackText
   } = sharedWordCardStyles;
 
   /**
@@ -125,8 +125,8 @@ export default function WordCardFront({
           {displayedWord}
         </Animated.Text>
       </View>
-      <View style={feedbackContainer}>
-
+      <View>
+        <Text style={feedbackText}>{FEEDBACK_TEXT_FRONT[cardState.feedback]}</Text>
       </View>
     </Animated.View>
   )

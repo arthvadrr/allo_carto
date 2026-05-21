@@ -9,7 +9,7 @@ import {
 import { colors } from "../../app/styles";
 import { CardDeckContext } from '../CardDeck/cardDeckContext';
 import WordCardBack from './WordCardBack';
-import { WordCardContext } from './wordCardContext';
+import { getFeedbackKey, WordCardContext } from './wordCardContext';
 import WordCardFront from './WordCardFront';
 
 /**
@@ -26,7 +26,7 @@ interface WordCardProps {
 
 export default function WordCard({ isCurrent }: WordCardProps) {
   const { wordCard } = wordCardStyles;
-  const { cardState } = useContext(WordCardContext);
+  const { cardState, setCardState } = useContext(WordCardContext);
   const { cardDeckDispatch } = useContext(CardDeckContext);
 
   /**
@@ -107,6 +107,18 @@ export default function WordCard({ isCurrent }: WordCardProps) {
     isCurrent,
     cardState.stage,
     cardDeckDispatch
+  ])
+
+  /**
+   * When state changes, update the feedback text
+   */
+  useLayoutEffect(() => {
+    setCardState((prev) => ({ ...prev, ...{ feedback: getFeedbackKey(prev) } }))
+  }, [
+    setCardState,
+    cardState.stage,
+    cardState.progress,
+    cardState.mistake
   ])
 
   /**
@@ -219,14 +231,12 @@ export const sharedWordCardStyles = StyleSheet.create({
     fontWeight: 500,
     fontSize: 18,
   },
-  feedbackContainer: {
-    padding: 4,
-    marginBottom: 16,
-    marginTop: 16,
-  },
   feedbackText: {
+    padding: 4,
     fontSize: 18,
-    fontWeight: 500,
+    fontWeight: 600,
+    marginTop: 8,
+    marginBottom: 8,
     color: colors.dark.success
   }
 })
