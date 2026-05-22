@@ -42,6 +42,7 @@ export default function WordCard({ isCurrent }: WordCardProps) {
    * Styles
   */
   const {
+    feedbackSuccess,
     feedbackWarning,
     feedbackError,
     answerSlotSuccess,
@@ -163,7 +164,7 @@ export default function WordCard({ isCurrent }: WordCardProps) {
       case 'SUCCESS':
         setArticleSlotStyle(answerSlotSuccess);
         setWordSlotStyle(answerSlotSuccess);
-        setFeedbackStyle({}); // It defaults to success already
+        setFeedbackStyle(feedbackSuccess);
         break;
       case 'WARNING':
         setFeedbackStyle(feedbackWarning);
@@ -185,6 +186,7 @@ export default function WordCard({ isCurrent }: WordCardProps) {
     })
     )
   }, [
+    feedbackSuccess,
     answerSlotSuccess,
     setCardState,
     cardState.progress,

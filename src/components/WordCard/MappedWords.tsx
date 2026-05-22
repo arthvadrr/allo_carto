@@ -235,7 +235,7 @@ const mappedWordsStyles = StyleSheet.create({
     fontWeight: 500
   },
   highlightSuccess: {
-    borderBottomColor: colors.light.success,
+    backgroundColor: colors.light.success,
   },
   highlightWarning: {
     borderBottomColor: colors.light.warning,

@@ -115,11 +115,7 @@ export default function WordCardFront({
               style={[
                 answerSlot,
                 articleClass,
-                articleWidthStyle,
-                (
-                  cardState.progress !== 'SUCCESS' &&
-                  cardState.progress !== 'DANGER' && articleSlotStyle
-                )
+                articleWidthStyle
               ]}
             >
               {cardState.selectedArticle && displayedArticle}
@@ -149,7 +145,13 @@ export default function WordCardFront({
         </Animated.Text>
       </View>
       <View style={feedbackContainer}>
-        <Text style={[feedbackText, feedbackStyle]}>
+        <Text style={[
+          feedbackText,
+          (
+            cardState.progress !== 'SUCCESS' &&
+            cardState.progress !== 'DANGER' && feedbackStyle
+          )
+        ]}>
           {FEEDBACK_TEXT_FRONT[cardState.feedbackKey] ?? ''}
         </Text>
       </View>
