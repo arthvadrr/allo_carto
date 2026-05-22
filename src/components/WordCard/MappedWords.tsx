@@ -52,15 +52,16 @@ function MappedButton({
   /**
    * Animation vars
    */
-  const buttonY = useSharedValue(0);
   const buttonBackgroundColor = useSharedValue(colors.light.background);
   const buttonBoxShadow = useSharedValue(`0 4px 0 0 ${colors.light.border}`);
+  const borderColor = useSharedValue(colors.dark.border);
+  const textColor = useSharedValue(colors.dark.text);
+  const buttonY = useSharedValue(0);
 
-  const wcsButtonActive = useAnimatedStyle(() => ({
+  const wcsButtonContainerActive = useAnimatedStyle(() => ({
     transform: [{ translateY: buttonY.value }],
     backgroundColor: buttonBackgroundColor.value,
-    color: colors.light.text,
-    boxShadow: buttonBoxShadow.value
+    boxShadow: buttonBoxShadow.value,
   }));
 
   const timing = useMemo(() => ({
@@ -74,12 +75,24 @@ function MappedButton({
   useEffect(() => {
     if (activeWord !== word) {
       buttonY.value = withTiming(0, timing);
-      buttonBackgroundColor.value = withTiming(colors.light.background, timing)
+      buttonBackgroundColor.value = withTiming(colors.light.background, timing);
+      buttonBoxShadow.value = `0 6px 0 0 ${colors.light.border}`
+      textColor.value = colors.dark.text;
     } else {
-      buttonY.value = withTiming(2, timing);
-      buttonBackgroundColor.value = withTiming(colors.light.border, timing)
+      buttonY.value = withTiming(6, timing);
+      buttonBackgroundColor.value = withTiming(colors.dark.primaryActive, timing);
+      buttonBoxShadow.value = '';
     }
-  }, [activeWord, timing, buttonY, buttonBackgroundColor, buttonBoxShadow, word]);
+  }, [
+    borderColor,
+    textColor,
+    activeWord,
+    timing,
+    buttonY,
+    buttonBackgroundColor,
+    buttonBoxShadow,
+    word
+  ]);
 
   /**
    * Destructure Styles
@@ -151,7 +164,7 @@ function MappedButton({
     <Animated.View
       style={[
         wcsButtonContainer,
-        wcsButtonActive
+        wcsButtonContainerActive
       ]}
       key={word}
     >
@@ -206,11 +219,12 @@ const mappedWordsStyles = StyleSheet.create({
     flexGrow: 1,
     borderRadius: 8,
     backgroundColor: colors.light.background,
-    maxWidth: 100
+    maxWidth: 120,
   },
   wcsButton: {
     borderRadius: 8,
     borderWidth: 1,
+    borderColor: 'transparent',
     padding: 12,
     paddingRight: 16,
     paddingLeft: 16,
@@ -221,16 +235,13 @@ const mappedWordsStyles = StyleSheet.create({
     fontWeight: 500
   },
   highlightSuccess: {
-    borderColor: colors.dark.success,
-    backgroundColor: colors.light.success
+    borderBottomColor: colors.light.success,
   },
   highlightWarning: {
-    borderColor: colors.dark.warning,
-    backgroundColor: colors.light.warning
+    borderBottomColor: colors.light.warning,
   },
   highlightDanger: {
-    borderColor: colors.dark.danger,
-    backgroundColor: colors.light.danger
+    borderBottomColor: colors.dark.success,
   },
   highlightTextSuccess: {
     color: colors.dark.success
@@ -239,6 +250,6 @@ const mappedWordsStyles = StyleSheet.create({
     color: colors.dark.warning
   },
   highlightTextDanger: {
-    color: colors.dark.danger
+
   }
 });

@@ -80,11 +80,24 @@ export const sharedWordCardStyles = StyleSheet.create({
     color: colors.dark.danger,
     backgroundColor: colors.light.danger,
   },
+  feedbackContainer: {
+    position: 'relative',
+    width: '100%',
+    height: 'auto',
+    marginTop: 24,
+    paddingTop: 8,
+    paddingLeft: 4,
+    paddingRight: 4,
+    paddingBottom: 8,
+    borderTopWidth: 1,
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
+    borderTopColor: colors.light.border,
+  },
   feedbackText: {
-    padding: 4,
+    textAlign: 'center',
     fontSize: 16,
     fontWeight: 600,
-    margin: 14,
     color: colors.dark.success
   },
   feedbackWarning: {
