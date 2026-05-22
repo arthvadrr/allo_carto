@@ -172,8 +172,10 @@ export default function WordCard({ isCurrent }: WordCardProps) {
         break;
       case 'DANGER':
         setFeedbackStyle(feedbackError);
-        setArticleSlotStyle(answerSlotError);
-        setWordSlotStyle(answerSlotError)
+        setArticleSlotStyle(answerSlotSuccess);
+        setWordSlotStyle(answerSlotSuccess);
+        if (hasArticleMistake) setArticleSlotStyle(answerSlotError);
+        if (hasWordMistake) setWordSlotStyle(answerSlotError)
         break;
     }
 

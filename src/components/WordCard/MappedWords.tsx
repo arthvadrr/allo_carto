@@ -117,7 +117,6 @@ const mappedWordsStyles = StyleSheet.create({
     flexGrow: 1,
     borderRadius: 8,
     backgroundColor: colors.light.background,
-    boxShadow: `0 4px 0 0 ${colors.light.border}`,
     maxWidth: 100
   },
   wcsButton: {

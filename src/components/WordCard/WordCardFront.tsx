@@ -69,7 +69,8 @@ export default function WordCardFront({
   } = cardState.word;
 
   /**
-   * User selected rendering
+   * Render the articlea and word the user has selected.
+   * These will animated when changing size, which is cool.
    */
   const displayedArticle = cardState.selectedArticle ?? englishArticle ?? '';
   const displayedWord = cardState.selectedWord ?? translation ?? '';

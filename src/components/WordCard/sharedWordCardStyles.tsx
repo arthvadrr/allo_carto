@@ -61,7 +61,6 @@ export const sharedWordCardStyles = StyleSheet.create({
   },
   answerSlot: {
     color: 'transparent',
-    borderTopColor: 'transparent',
     borderBottomWidth: 2,
     padding: 8,
     paddingRight: 16,
@@ -72,8 +71,6 @@ export const sharedWordCardStyles = StyleSheet.create({
   answerSlotSuccess: {
     color: colors.dark.success,
     backgroundColor: colors.light.success,
-    borderTopColor: colors.dark.success,
-    boxShadow: `0 2px 4px 0 ${colors.light.border}`,
   },
   answerSlotWarning: {
     color: colors.dark.warning,
