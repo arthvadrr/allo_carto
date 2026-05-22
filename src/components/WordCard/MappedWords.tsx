@@ -4,6 +4,8 @@ import { Pressable, StyleSheet, Text, TextStyle, ViewStyle } from "react-native"
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 import { WordCardContext } from "./wordCardContext";
 
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+
 /**
  * Typing
  */
@@ -58,7 +60,7 @@ function MappedButton({
   const textColor = useSharedValue(colors.dark.text);
   const buttonY = useSharedValue(0);
 
-  const wcsButtonContainerActive = useAnimatedStyle(() => ({
+  const wcsButtonActive = useAnimatedStyle(() => ({
     transform: [{ translateY: buttonY.value }],
     backgroundColor: buttonBackgroundColor.value,
     boxShadow: buttonBoxShadow.value,
@@ -73,17 +75,27 @@ function MappedButton({
    * Handle animation side effects
    */
   useEffect(() => {
+
+
+
     if (activeWord !== word) {
       buttonY.value = withTiming(0, timing);
       buttonBackgroundColor.value = withTiming(colors.light.background, timing);
       buttonBoxShadow.value = `0 6px 0 0 ${colors.light.border}`
       textColor.value = colors.dark.text;
     } else {
-      buttonY.value = withTiming(6, timing);
-      buttonBackgroundColor.value = withTiming(colors.dark.primaryActive, timing);
-      buttonBoxShadow.value = '';
+      if (cardState.progress === 'SUCCESS') {
+        buttonY.value = withTiming(-6, timing);
+        buttonBackgroundColor.value = withTiming(colors.light.success, timing);
+        buttonBoxShadow.value = `0 0px 8px 0 ${colors.light.border}`
+      } else {
+        buttonY.value = withTiming(6, timing);
+        buttonBoxShadow.value = '';
+      }
+
     }
   }, [
+    cardState.progress,
     borderColor,
     textColor,
     activeWord,
@@ -162,15 +174,13 @@ function MappedButton({
    */
   return (
     <Animated.View
-      style={[
-        wcsButtonContainer,
-        wcsButtonContainerActive
-      ]}
+      style={wcsButtonContainer}
       key={word}
     >
-      <Pressable
+      <AnimatedPressable
         style={[
           wcsButton,
+          wcsButtonActive,
           (
             word === highlightArticle ||
             word === highlightWord
@@ -188,7 +198,7 @@ function MappedButton({
           ) &&
           highlightTextStyles
         ]}>{word}</Text>
-      </Pressable>
+      </AnimatedPressable>
     </Animated.View>
   )
 }
@@ -215,19 +225,18 @@ export default function MappedWords({ words, activeWord, handler }: MappedWordsP
  */
 const mappedWordsStyles = StyleSheet.create({
   wcsButtonContainer: {
-    display: 'flex',
-    flexGrow: 1,
-    borderRadius: 8,
-    backgroundColor: colors.light.background,
-    maxWidth: 120,
+    display: 'contents',
   },
   wcsButton: {
+    flexGrow: 1,
     borderRadius: 8,
     borderWidth: 1,
     borderColor: 'transparent',
     padding: 12,
     paddingRight: 16,
     paddingLeft: 16,
+    maxWidth: 120,
+    backgroundColor: colors.light.background,
   },
   wcsText: {
     textAlign: 'center',
