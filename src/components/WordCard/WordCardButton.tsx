@@ -4,6 +4,10 @@ import { Pressable, PressableProps, StyleSheet, Text, TextStyle, ViewStyle } fro
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { CardMistake, WordCardContext, WordCardStateProps } from './wordCardContext';
 
+/**
+ * I guess there's no Animated.Pressable?
+ * I don't know the rules. This works though.
+ */
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 /**
@@ -47,6 +51,10 @@ export default function WordCardButton({
    */
   useLayoutEffect(() => {
     switch (cardState.progress) {
+      case 'PENDING':
+        setPressableStateStyle({});
+        setTextStateStyle({});
+        break;
       case 'SUCCESS': {
         setPressableStateStyle(successPressable);
         setTextStateStyle(successText);
@@ -60,10 +68,6 @@ export default function WordCardButton({
       case 'DANGER':
         setPressableStateStyle(errorPressable);
         setTextStateStyle(errorText);
-        break;
-      case 'PENDING':
-        setPressableStateStyle({});
-        setTextStateStyle({});
         break;
     }
   }, [
@@ -106,52 +110,65 @@ export default function WordCardButton({
     let updates: Partial<WordCardStateProps> | null = null;
     let mistake: CardMistake = 'NONE';
 
-    if (cardState.stage === 'READY') {
+    /**
+     * What we do depends on what stage the card is in.
+     */
+    switch (cardState.stage) {
       /**
-       * Did the user get the wrong article?
+       * READY is initial value, so this is the first time
+       * the user hit the 'Check' button. Check if the user 
+       * got the right answer or made a mistake.
        */
-      if (
-        cardState.correctArticle &&
-        cardState.correctArticle !== cardState.selectedArticle
-      ) {
-        mistake = 'ARTICLE';
-      }
+      case 'READY':
+        if (
+          cardState.correctArticle &&
+          cardState.correctArticle !== cardState.selectedArticle
+        ) mistake = 'ARTICLE';
+
+        if (cardState.correctWord !== cardState.selectedWord) {
+          mistake = mistake === 'ARTICLE' ? 'BOTH' : 'WORD';
+        }
+
+        if (mistake !== 'NONE')
+          updates = { progress: 'WARNING', mistake };
+        else
+          updates = { progress: 'SUCCESS', stage: 'CORRECT' };
+        break;
 
       /**
-       * Did the user get the wrong word? Both article and word?
+       * CORRECT means We were already showing the user 
+       * the other side of the card (with correct answers). 
+       * Mark this one completed.
        */
-      if (cardState.correctWord !== cardState.selectedWord) {
-        mistake = mistake === 'ARTICLE' ? 'BOTH' : 'WORD';
-      }
+      case 'CORRECT':
+        updates = { progress: 'SUCCESS', stage: 'COMPLETED' };
+        break;
 
       /**
-       * If we have a mistake, trigger warning state
-       * Else we can show the user they got it right.
+       * INCORRECT means the user got it wrong and
+       * ran out of attempts. Progress the card 
+       * without upping the word score. TODO
        */
-      if (mistake !== 'NONE') {
-        updates = { progress: 'WARNING', mistake };
-      } else {
-        updates = { progress: 'SUCCESS', stage: 'CORRECT' };
-      }
-      /**
-       * Else if we were already showing the user the other
-       * side of the card, mark this one completed.
-       */
-    } else if (cardState.stage === 'CORRECT') {
-      updates = { progress: 'SUCCESS', stage: 'COMPLETED' };
-      /**
-       * Else if the user got it wrong and
-       * ran out of attempts. Progress the
-       * card without upping the word score.
-       */
-    } else if (cardState.stage === 'INCORRECT') {
-      updates = { progress: 'DANGER', stage: 'COMPLETED' }
+      case 'INCORRECT':
+        updates = { progress: 'DANGER', stage: 'COMPLETED' }
+        break;
     }
 
-    if (cardState.attempts > 0 && mistake !== 'NONE') {
+    /**
+     * Check if the user has reached
+     * the max allowed attempts.
+     */
+    if (
+      cardState.attempts >= cardState.maxAttempts &&
+      mistake !== 'NONE'
+    ) {
       updates = { progress: 'DANGER', stage: 'INCORRECT' }
     }
 
+    /**
+     * Update the card's state and 
+     * increment the user's attempts.
+     */
     if (updates) {
       setCardState(prev => ({
         ...prev,
@@ -159,8 +176,8 @@ export default function WordCardButton({
         attempts: prev.attempts + 1,
       }));
     }
-
   }, [
+    cardState.maxAttempts,
     cardState.attempts,
     cardState.stage,
     cardState.correctArticle,
@@ -183,7 +200,8 @@ export default function WordCardButton({
   }, [checkAnswer]);
 
   /**
-   * Handle pressed button style only side effects
+   * Side effect that sets the styles 
+   * when a user presses the button.
    */
   useEffect(() => {
     if (isPressed) {
@@ -268,9 +286,9 @@ const wordCardButtonStyles = StyleSheet.create({
     shadowColor: colors.dark.warning,
   },
   errorPressable: {
-    backgroundColor: colors.light.error,
-    borderColor: colors.light.error,
-    shadowColor: colors.dark.error,
+    backgroundColor: colors.light.danger,
+    borderColor: colors.light.danger,
+    shadowColor: colors.dark.danger,
   },
   successText: {
     color: colors.dark.text
@@ -279,6 +297,6 @@ const wordCardButtonStyles = StyleSheet.create({
     color: colors.dark.warning,
   },
   errorText: {
-    color: colors.dark.error,
+    color: colors.dark.danger,
   },
 });

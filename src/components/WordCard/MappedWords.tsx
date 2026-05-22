@@ -20,14 +20,19 @@ interface MappedButtonProps {
 
 /**
  * Private MappedButton Component
- * (We need this component so we can create animations scoped per button)
+ * 
+ * We need this component in addition to the other one
+ * (below) so that we can create animations scoped per button.
+ * We can't animate like this in a map.
  */
 function MappedButton({
   word,
   activeWord,
   handler,
 }: MappedButtonProps) {
-  const { wcsButtonContainer, wcsButton, wcsText } = mappedWordsStyles;
+  /**
+   * Animation vars
+   */
   const buttonY = useSharedValue(0);
   const buttonBackgroundColor = useSharedValue(colors.light.background);
   const buttonBoxShadow = useSharedValue(`0 4px 0 0 ${colors.light.border}`);
@@ -44,6 +49,9 @@ function MappedButton({
     easing: Easing.inOut(Easing.bounce)
   }), []);
 
+  /**
+   * Handle animation side effects
+   */
   useEffect(() => {
     if (activeWord !== word) {
       buttonY.value = withTiming(0, timing);
@@ -52,9 +60,21 @@ function MappedButton({
       buttonY.value = withTiming(2, timing);
       buttonBackgroundColor.value = withTiming(colors.light.border, timing)
     }
-    //
-  }, [activeWord, timing, buttonY, buttonBackgroundColor, buttonBoxShadow, word])
+  }, [activeWord, timing, buttonY, buttonBackgroundColor, buttonBoxShadow, word]);
 
+  /**
+   * Destructure Styles
+   */
+  const {
+    wcsButtonContainer,
+    wcsButton,
+    wcsText
+  } = mappedWordsStyles;
+
+  /**
+   * Render the words.
+   * Note the hitslop, it works well here.
+   */
   return (
     <Animated.View
       style={[wcsButtonContainer, wcsButtonActive]}
@@ -73,6 +93,7 @@ function MappedButton({
 
 /**
  * MappedWords Component
+ * Map the word buttons
  */
 export default function MappedWords({ words, activeWord, handler }: MappedWordsProps) {
   return words.map((word: string) => {

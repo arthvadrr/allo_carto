@@ -20,31 +20,30 @@ export interface WordProps {
 /**
  * Concatenation of stage + progress + mistake
  */
-export const FEEDBACK_TEXT_FRONT = {
+export const FEEDBACK_TEXT_FRONT: Partial<Record<FeedbackKey, string>> = {
 	READY_PENDING_NONE: '',
 	READY_WARNING_ARTICLE: 'The article is incorrect!',
 	READY_WARNING_WORD: 'The word is incorrect!',
 	READY_WARNING_BOTH: 'Both are incorrect!',
-	FINAL_WARNING_ARTICLE: 'The article is incorrect!',
-	FINAL_WARNING_WORD: 'The word is incorrect!',
-	FINAL_WARNING_BOTH: 'Both are incorrect!',
+	INCORRECT_WARNING_ARTICLE: 'The article is incorrect!',
+	INCORRECT_WARNING_WORD: 'The word is incorrect!',
+	INCORRECT_WARNING_BOTH: 'Both are incorrect!',
 };
 
-export const FEEDBACK_TEXT_BACK = {
+export const FEEDBACK_TEXT_BACK: Partial<Record<FeedbackKey, string>> = {
+	READY_PENDING_NONE: '',
 	CORRECT_SUCCESS_NONE: 'Correct! Great Job!',
 	COMPLETED_DANGER_ARTICLE: 'That is the wrong article!',
 	COMPLETED_DANGER_WORD: 'That is the wrong word!',
 	COMPLETED_DANGER_BOTH: 'Both are wrong!',
 };
 
-type FeedbackText =
-	| keyof typeof FEEDBACK_TEXT_FRONT
-	| keyof typeof FEEDBACK_TEXT_BACK;
+export type FeedbackKey = `${CardStage}_${CardProgress}_${CardMistake}`;
 
 export function getFeedbackKey(
 	state: Pick<WordCardStateProps, 'stage' | 'progress' | 'mistake'>,
-): FeedbackText {
-	return `${state.stage}_${state.progress}_${state.mistake}` as FeedbackText;
+): FeedbackKey {
+	return `${state.stage}_${state.progress}_${state.mistake}`;
 }
 
 /**
@@ -69,8 +68,9 @@ export interface WordCardStateProps {
 	stage: CardStage;
 	progress: CardProgress;
 	mistake: CardMistake;
-	feedback: FeedbackText;
+	feedbackKey: FeedbackKey;
 	attempts: number;
+	maxAttempts: number;
 }
 
 export const initialWordState: WordProps = {
@@ -90,8 +90,9 @@ export const initialWordCardState: WordCardStateProps = {
 	stage: 'READY',
 	progress: 'PENDING',
 	mistake: 'NONE',
-	feedback: 'READY_PENDING_NONE',
+	feedbackKey: 'READY_PENDING_NONE',
 	attempts: 0,
+	maxAttempts: 2,
 };
 
 interface WordCardContextType {
