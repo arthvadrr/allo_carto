@@ -32,9 +32,9 @@ export const FEEDBACK_TEXT_FRONT = {
 
 export const FEEDBACK_TEXT_BACK = {
 	CORRECT_SUCCESS_NONE: 'Correct! Great Job!',
-	COMPLETED_ERROR_ARTICLE: 'That is the wrong article!',
-	COMPLETED_ERROR_WORD: 'That is the wrong word!',
-	COMPLETED_ERROR_BOTH: 'Both are wrong!',
+	COMPLETED_DANGER_ARTICLE: 'That is the wrong article!',
+	COMPLETED_DANGER_WORD: 'That is the wrong word!',
+	COMPLETED_DANGER_BOTH: 'Both are wrong!',
 };
 
 type FeedbackText =
@@ -55,8 +55,8 @@ export function getFeedbackKey(
  * It also allows us to expand the state machine
  * later if we need to.
  */
-export type CardStage = 'READY' | 'FINAL' | 'CORRECT' | 'COMPLETED';
-export type CardProgress = 'PENDING' | 'SUCCESS' | 'WARNING' | 'ERROR';
+export type CardStage = 'READY' | 'CORRECT' | 'INCORRECT' | 'COMPLETED';
+export type CardProgress = 'PENDING' | 'SUCCESS' | 'WARNING' | 'DANGER';
 export type CardMistake = 'NONE' | 'ARTICLE' | 'WORD' | 'BOTH';
 
 export interface WordCardStateProps {
@@ -70,6 +70,7 @@ export interface WordCardStateProps {
 	progress: CardProgress;
 	mistake: CardMistake;
 	feedback: FeedbackText;
+	attempts: number;
 }
 
 export const initialWordState: WordProps = {
@@ -90,6 +91,7 @@ export const initialWordCardState: WordCardStateProps = {
 	progress: 'PENDING',
 	mistake: 'NONE',
 	feedback: 'READY_PENDING_NONE',
+	attempts: 0,
 };
 
 interface WordCardContextType {

@@ -2,7 +2,7 @@ import { colors } from '@/src/app/styles';
 import { ReactElement, ReactNode, useCallback, useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { Pressable, PressableProps, StyleSheet, Text, TextStyle, ViewStyle } from 'react-native';
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { CardMistake, WordCardContext } from './wordCardContext';
+import { CardMistake, WordCardContext, WordCardStateProps } from './wordCardContext';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -17,7 +17,6 @@ interface WordCardButtonProps extends PressableProps {
 /**
  * WordCardButton Component
  * Handles checking/next card actions
- * https://reactnative.dev/docs/components-and-apis
  */
 export default function WordCardButton({
   children,
@@ -28,7 +27,6 @@ export default function WordCardButton({
   const { cardState, setCardState } = useContext(WordCardContext);
   const [pressableStateStyle, setPressableStateStyle] = useState<ViewStyle | null>({});
   const [textStateStyle, setTextStateStyle] = useState<TextStyle | null>({});
-
   /**
    * Style vars
    */
@@ -59,7 +57,7 @@ export default function WordCardButton({
         setTextStateStyle(warningText);
         break;
       }
-      case 'ERROR':
+      case 'DANGER':
         setPressableStateStyle(errorPressable);
         setTextStateStyle(errorText);
         break;
@@ -105,55 +103,65 @@ export default function WordCardButton({
    * Check the user's answer
    */
   const checkAnswer = useCallback(() => {
-    if (
-      cardState.stage === 'READY' ||
-      cardState.stage === 'FINAL'
-    ) {
-      /**
-       * Determine if there was a mistake
-       */
-      let mistake: CardMistake = 'NONE';
+    let updates: Partial<WordCardStateProps> | null = null;
+    let mistake: CardMistake = 'NONE';
 
+    if (cardState.stage === 'READY') {
+      /**
+       * Did the user get the wrong article?
+       */
       if (
-        (cardState.correctArticle) &&
-        (cardState.correctArticle !== cardState.selectedArticle)
+        cardState.correctArticle &&
+        cardState.correctArticle !== cardState.selectedArticle
       ) {
         mistake = 'ARTICLE';
       }
 
+      /**
+       * Did the user get the wrong word? Both article and word?
+       */
       if (cardState.correctWord !== cardState.selectedWord) {
         mistake = mistake === 'ARTICLE' ? 'BOTH' : 'WORD';
       }
 
       /**
-       * Set card state
+       * If we have a mistake, trigger warning state
+       * Else we can show the user they got it right.
        */
       if (mistake !== 'NONE') {
-        setCardState(prev => ({
-          ...prev, ...{
-            progress: 'WARNING',
-            mistake,
-          }
-        }));
+        updates = { progress: 'WARNING', mistake };
       } else {
-        setCardState(prev => ({
-          ...prev, ...{
-            progress: 'SUCCESS',
-            stage: 'CORRECT',
-          }
-        }));
+        updates = { progress: 'SUCCESS', stage: 'CORRECT' };
       }
+      /**
+       * Else if we were already showing the user the other
+       * side of the card, mark this one completed.
+       */
     } else if (cardState.stage === 'CORRECT') {
+      updates = { progress: 'SUCCESS', stage: 'COMPLETED' };
+      /**
+       * Else if the user got it wrong and
+       * ran out of attempts. Progress the
+       * card without upping the word score.
+       */
+    } else if (cardState.stage === 'INCORRECT') {
+      updates = { progress: 'DANGER', stage: 'COMPLETED' }
+    }
+
+    if (cardState.attempts > 0 && mistake !== 'NONE') {
+      updates = { progress: 'DANGER', stage: 'INCORRECT' }
+    }
+
+    if (updates) {
       setCardState(prev => ({
-        ...prev, ...{
-          progress: 'SUCCESS',
-          stage: 'COMPLETED',
-        }
+        ...prev,
+        ...updates,
+        attempts: prev.attempts + 1,
       }));
     }
 
-
   }, [
+    cardState.attempts,
     cardState.stage,
     cardState.correctArticle,
     cardState.selectedArticle,
@@ -202,7 +210,7 @@ export default function WordCardButton({
     <Animated.View style={[containerStyles, animatedContainerStyle]}>
       <AnimatedPressable
         {...props}
-        disabled={cardState.progress === 'WARNING' || cardState.progress === 'ERROR'}
+        disabled={cardState.progress === 'WARNING'}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
         style={[

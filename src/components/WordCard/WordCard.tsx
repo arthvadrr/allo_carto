@@ -93,9 +93,13 @@ export default function WordCard({ isCurrent }: WordCardProps) {
   };
 
   useLayoutEffect(() => {
+    const shouldFlip =
+      cardState.progress === 'SUCCESS' ||
+      cardState.progress === 'DANGER'
+
     flipDegrees.value = withTiming(
-      cardState.progress === 'SUCCESS' ? 180 : 0, {
-      duration: cardState.progress === 'SUCCESS' ? flipDuration.value : 0,
+      shouldFlip ? 180 : 0, {
+      duration: shouldFlip ? flipDuration.value : 0,
       easing: Easing.inOut(Easing.cubic)
     });
   }, [
@@ -110,7 +114,9 @@ export default function WordCard({ isCurrent }: WordCardProps) {
    * and the user hits the button.
    */
   useEffect(() => {
-    if (isCurrent && cardState.stage === 'COMPLETED') {
+    if (isCurrent && (
+      cardState.stage === 'COMPLETED'
+    )) {
       cardDeckDispatch({ type: 'next_card' });
     }
   }, [
@@ -140,7 +146,7 @@ export default function WordCard({ isCurrent }: WordCardProps) {
     if (cardState.progress === 'WARNING') {
       setFeedbackStyle(feedbackWarning);
       slotStyle = answerSlotWarning;
-    } else if (cardState.progress === 'ERROR') {
+    } else if (cardState.progress === 'DANGER') {
       setFeedbackStyle(feedbackError);
       slotStyle = answerSlotError;
     }
