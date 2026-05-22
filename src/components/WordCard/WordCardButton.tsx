@@ -159,7 +159,7 @@ export default function WordCardButton({
      * the max allowed attempts.
      */
     if (
-      cardState.attempts >= cardState.maxAttempts &&
+      cardState.attempts + 1 >= cardState.maxAttempts &&
       mistake !== 'NONE'
     ) {
       updates = { progress: 'DANGER', stage: 'INCORRECT', mistake }
