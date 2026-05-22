@@ -76,7 +76,7 @@ function MappedButton({
    */
   useEffect(() => {
 
-
+    // TODO Raise the buttons
 
     if (activeWord !== word) {
       buttonY.value = withTiming(0, timing);

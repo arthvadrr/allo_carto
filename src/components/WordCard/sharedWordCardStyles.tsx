@@ -70,15 +70,12 @@ export const sharedWordCardStyles = StyleSheet.create({
   },
   answerSlotSuccess: {
     color: colors.dark.text,
-    backgroundColor: colors.light.success,
   },
   answerSlotWarning: {
-    color: colors.dark.warning,
     backgroundColor: colors.light.warning,
   },
   answerSlotError: {
-    color: colors.dark.danger,
-    borderBottomColor: colors.dark.danger
+    backgroundColor: colors.light.danger
   },
   feedbackContainer: {
     position: 'relative',
@@ -109,6 +106,7 @@ export const sharedWordCardStyles = StyleSheet.create({
     backgroundColor: colors.light.warning
   },
   feedbackError: {
-    color: colors.dark.danger
+    color: colors.dark.danger,
+    backgroundColor: colors.light.danger
   }
 })

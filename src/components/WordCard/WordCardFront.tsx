@@ -115,7 +115,12 @@ export default function WordCardFront({
               style={[
                 answerSlot,
                 articleClass,
-                articleWidthStyle
+                articleWidthStyle,
+                (
+                  cardState.progress !== 'SUCCESS' &&
+                  cardState.selectedArticle &&
+                  articleSlotStyle
+                )
               ]}
             >
               {cardState.selectedArticle && displayedArticle}
@@ -137,7 +142,8 @@ export default function WordCardFront({
             wordWidthStyle,
             (
               cardState.progress !== 'SUCCESS' &&
-              cardState.progress !== 'DANGER' && wordSlotStyle
+              cardState.selectedWord &&
+              wordSlotStyle
             )
           ]}
         >
@@ -149,7 +155,7 @@ export default function WordCardFront({
           feedbackText,
           (
             cardState.progress !== 'SUCCESS' &&
-            cardState.progress !== 'DANGER' && feedbackStyle
+            feedbackStyle
           )
         ]}>
           {FEEDBACK_TEXT_FRONT[cardState.feedbackKey] ?? ''}

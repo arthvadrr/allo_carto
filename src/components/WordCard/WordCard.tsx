@@ -109,8 +109,7 @@ export default function WordCard({ isCurrent }: WordCardProps) {
    */
   useLayoutEffect(() => {
     const shouldFlip =
-      cardState.progress === 'SUCCESS' ||
-      cardState.progress === 'DANGER'
+      cardState.progress === 'SUCCESS'
 
     flipDegrees.value = withTiming(
       shouldFlip ? 180 : 0, {
