@@ -63,35 +63,3 @@
 **Lexend** is used throughout the application. The font is included in `app/assets/fonts/lexend-variable.ttf` and loaded asychonously via the `useFonts` hook via expo.
 
 https://blog.logrocket.com/how-to-add-custom-fonts-react-native/
-
-## Feature Word Rankings
-
-Use material icons
-
-icons available: fibernew, stars, militarytech, emojievents, diamond
-
-Fibernew - for new words - rank new
-
-import FiberNewIcon from '@mui/icons-material/FiberNew'; import FiberNewOutlinedIcon from '@mui/icons-material/FiberNewOutlined';
-
-stars - for 5 times - rank bronze
-
-import StarsIcon from '@mui/icons-material/Stars';
-
-militarytech - for 10 times - rank silver
-
-import MilitaryTechIcon from '@mui/icons-material/MilitaryTech'; import MilitaryTechOutlinedIcon from '@mui/icons-material/MilitaryTechOutlined';
-
-emojievents - for 20 times - rank gold
-
-diamond - for 40 times - rank platinum
-
-psychology - for 80 times - rank memorized
-
-silver: #e1e7ef;
-
-gold: #ffc57a;
-
-diamond: #9ddaff;
-
-memorized: #00ffcf

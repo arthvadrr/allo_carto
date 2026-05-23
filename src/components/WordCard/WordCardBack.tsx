@@ -5,6 +5,7 @@ import Animated, { type AnimatedStyle } from "react-native-reanimated";
 import { sharedWordCardStyles } from "./sharedWordCardStyles";
 import { FEEDBACK_TEXT_BACK, WordCardContext } from "./wordCardContext";
 import WordCardHeader from "./WordCardHeader";
+
 /**
  * Typing
  */

@@ -40,10 +40,10 @@ export const colors = {
 	},
 	rank: {
 		fnew: '#b7b7b7',
-		bronze: '#deb68fd4',
+		bronze: '#f4d2b1d4',
 		silver: '#e1e7ef',
-		gold: '#ffc57a',
-		diamond: '#9ddaff',
+		gold: '#ffd196',
+		diamond: '#c6e9ff',
 		memorized: '#00ffcf',
 	},
 };

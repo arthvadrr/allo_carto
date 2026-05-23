@@ -12,7 +12,7 @@ export default function CardDeckView() {
    * Get a card deck (async)
    */
   useEffect(() => {
-    cardDeckDispatch({ type: 'get_a_deck' });
+    cardDeckDispatch({ type: 'GET_DECK' });
   }, []);
 
   /**
