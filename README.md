@@ -87,3 +87,11 @@ emojievents - for 20 times - rank gold
 diamond - for 40 times - rank platinum
 
 psychology - for 80 times - rank memorized
+
+silver: #e1e7ef;
+
+gold: #ffc57a;
+
+diamond: #9ddaff;
+
+memorized: #00ffcf

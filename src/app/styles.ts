@@ -39,22 +39,12 @@ export const colors = {
 		danger: '#FF7081',
 	},
 	rank: {
-		light: {
-			new: '',
-			bronze: '',
-			silver: '',
-			gold: '',
-			platinum: '',
-			memorized: '',
-		},
-		dark: {
-			new: '',
-			bronze: '',
-			silver: '',
-			gold: '',
-			platinum: '',
-			memorized: '',
-		},
+		fnew: '#b7b7b7',
+		bronze: '#deb68fd4',
+		silver: '#e1e7ef',
+		gold: '#ffc57a',
+		diamond: '#9ddaff',
+		memorized: '#00ffcf',
 	},
 };
 
