@@ -1,5 +1,5 @@
 import { colors } from "@/src/app/styles";
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import { type ViewStyle, StyleSheet, Text, TextStyle, View } from "react-native";
 import Animated, { type AnimatedStyle } from "react-native-reanimated";
 import { sharedWordCardStyles } from "./sharedWordCardStyles";
@@ -19,7 +19,7 @@ interface WordCardBackProps {
 /**
  * WordCardBack Component
  */
-export default function WordCardBack({
+const WordCardBack = memo(function WordCardBackMemo({
   wordCardBackFlippedStyle,
   feedbackStyle,
   articleSlotStyle,
@@ -96,7 +96,12 @@ export default function WordCardBack({
       </View>
     </Animated.View>
   )
-}
+});
+
+/**
+ * Export memoized
+ */
+export default WordCardBack;
 
 /**
  * Styles

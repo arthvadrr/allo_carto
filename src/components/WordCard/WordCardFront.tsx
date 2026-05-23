@@ -1,5 +1,5 @@
 import { colors } from "@/src/app/styles";
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import { type LayoutChangeEvent, StyleSheet, Text, type TextStyle, View, type ViewStyle } from "react-native";
 import type { AnimatedStyle } from "react-native-reanimated";
 import Animated from "react-native-reanimated";
@@ -24,7 +24,7 @@ interface WordCardFrontProps {
 /**
  * WordCardFront component
  */
-export default function WordCardFront({
+const WordCardFront = memo(function WordCardFrontMemo({
   handleWordWidth,
   handleArticleWidth,
   articleWidthStyle,
@@ -150,7 +150,7 @@ export default function WordCardFront({
       </View>
     </Animated.View>
   )
-}
+});
 
 /**
  * Styles
@@ -170,3 +170,5 @@ export const wordCardFrontStyles = StyleSheet.create({
     borderBottomWidth: 0
   }
 });
+
+export default WordCardFront;
