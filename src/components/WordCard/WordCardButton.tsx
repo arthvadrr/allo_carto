@@ -173,6 +173,9 @@ export default function WordCardButton({
       cardState.attempts + 1 >= cardState.maxAttempts &&
       mistake !== 'NONE'
     ) {
+      Haptics.notificationAsync(
+        Haptics.NotificationFeedbackType.Warning
+      )
       updates = { progress: 'DANGER', stage: 'INCORRECT', mistake }
     }
 
