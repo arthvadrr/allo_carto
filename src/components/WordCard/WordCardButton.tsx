@@ -161,6 +161,9 @@ export default function WordCardButton({
        * without upping the word score. TODO
        */
       case 'INCORRECT':
+        Haptics.notificationAsync(
+          Haptics.NotificationFeedbackType.Error
+        )
         updates = { progress: 'DANGER', stage: 'COMPLETED' }
         break;
     }
