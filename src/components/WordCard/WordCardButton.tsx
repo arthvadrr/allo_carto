@@ -131,8 +131,12 @@ export default function WordCardButton({
           mistake = mistake === 'ARTICLE' ? 'BOTH' : 'WORD';
         }
 
-        if (mistake !== 'NONE')
+        if (mistake !== 'NONE') {
+          Haptics.notificationAsync(
+            Haptics.NotificationFeedbackType.Warning
+          )
           updates = { progress: 'WARNING', mistake };
+        }
         /**
          * User got the answer correct ↓ 
          * (that's a down arrow but it' wittle - it's a thing today...)
@@ -176,9 +180,6 @@ export default function WordCardButton({
       cardState.attempts + 1 >= cardState.maxAttempts &&
       mistake !== 'NONE'
     ) {
-      Haptics.notificationAsync(
-        Haptics.NotificationFeedbackType.Warning
-      )
       updates = { progress: 'DANGER', stage: 'INCORRECT', mistake }
     }
 
