@@ -9,8 +9,9 @@ import {
 import { colors } from "../../app/styles";
 import { CardDeckContext } from '../CardDeck/cardDeckContext';
 import { sharedWordCardStyles } from './sharedWordCardStyles';
+import { useWordCardUI } from './useWordCardUI';
 import WordCardBack from './WordCardBack';
-import { getFeedbackKey, useWordCardUI } from './wordCardContext';
+import { getFeedbackKey } from './wordCardContext';
 import WordCardFront from './WordCardFront';
 
 /**

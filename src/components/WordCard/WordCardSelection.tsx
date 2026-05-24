@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
 import MappedWords from './MappedWords';
-import { useWordCardUI } from './wordCardContext';
+import { useWordCardUI } from './useWordCardUI';
 
 /**
  * Typing
