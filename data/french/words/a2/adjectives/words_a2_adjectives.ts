@@ -4,7 +4,7 @@ export const words_a2_adjectives: Word[] = [
 	{
 		id: 'word_adjective_pluvieux',
 		frenchWord: 'pluvieux',
-		englishWord: 'rainy',
+		englishWord: ['rainy'],
 		isVulgar: false,
 		lemmaId: 'pluvieux',
 		partOfSpeech: 'adjective',
@@ -17,7 +17,7 @@ export const words_a2_adjectives: Word[] = [
 	{
 		id: 'word_adjective_chaleureux',
 		frenchWord: 'chaleureux',
-		englishWord: 'cozy / warm / welcoming',
+		englishWord: ['cozy', 'warm', 'welcoming'],
 		isVulgar: false,
 		lemmaId: 'chaleureux',
 		partOfSpeech: 'adjective',
@@ -29,7 +29,7 @@ export const words_a2_adjectives: Word[] = [
 	{
 		id: 'word_adjective_tranquille',
 		frenchWord: 'tranquille',
-		englishWord: 'quiet / calm',
+		englishWord: ['quiet', 'calm'],
 		isVulgar: false,
 		lemmaId: 'tranquille',
 		partOfSpeech: 'adjective',

@@ -7,7 +7,7 @@ export const mockDeck: Word[] = [
 	{
 		id: 'word_noun_chien',
 		frenchWord: 'chien',
-		englishWord: 'dog',
+		englishWord: ['dog'],
 		isVulgar: false,
 		lemmaId: 'chien',
 		frenchArticle: 'le',
@@ -21,7 +21,7 @@ export const mockDeck: Word[] = [
 	{
 		id: 'word_noun_maison',
 		frenchWord: 'maison',
-		englishWord: 'house',
+		englishWord: ['house'],
 		isVulgar: false,
 		lemmaId: 'maison',
 		frenchArticle: 'la',
@@ -35,7 +35,7 @@ export const mockDeck: Word[] = [
 	{
 		id: 'word_noun_livre',
 		frenchWord: 'livre',
-		englishWord: 'book',
+		englishWord: ['book'],
 		isVulgar: false,
 		lemmaId: 'livre',
 		frenchArticle: 'le',
@@ -49,7 +49,7 @@ export const mockDeck: Word[] = [
 	{
 		id: 'word_noun_pomme',
 		frenchWord: 'pomme',
-		englishWord: 'apple',
+		englishWord: ['apple'],
 		isVulgar: false,
 		lemmaId: 'pomme',
 		frenchArticle: 'la',
