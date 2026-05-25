@@ -38,7 +38,7 @@ function getMistake(
     mistake = 'ARTICLE';
   }
 
-  if (currentCard.translation !== state.selectedWord) {
+  if (currentCard.englishWord !== state.selectedWord) {
     mistake = mistake === 'ARTICLE' ? 'BOTH' : 'WORD';
   }
 
