@@ -15,7 +15,7 @@ export type CEFR = 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2';
 export interface Word {
 	id: string;
 	frenchWord: string;
-	englishWord: string[];
+	englishWords: string[];
 	frenchArticle?: string;
 	englishArticle?: string;
 	pronunciation: string;
@@ -32,7 +32,7 @@ export interface Word {
 export const initialWordState: Word = {
 	id: '',
 	frenchWord: '',
-	englishWord: [''],
+	englishWords: [''],
 	pronunciation: '',
 	isVulgar: false,
 	CEFR: 'A1',
