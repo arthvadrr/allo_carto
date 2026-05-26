@@ -51,7 +51,7 @@ export default function AppLayout() {
             }} />
             <Stack.Screen name="(routes)/CardDeck" options={{
               headerShown: true,
-              headerBackTitle: 'Home',
+              headerBackTitle: 'Choose',
               headerTitle: 'Review a deck'
             }} />
             <Stack.Screen name="(routes)/ChooseCardDeck" options={{
