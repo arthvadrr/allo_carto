@@ -3,33 +3,49 @@ import { CardDeck } from "@/data/french/decks/deckTyps";
 import { useCardDeck } from "@/src/components/CardDeck/useCardDeck";
 import LinkButton from "@/src/components/LinkButton";
 import { getDeck } from "@/src/db/interface";
+import { LinearGradient } from "expo-linear-gradient";
 import { router } from 'expo-router';
-import { useCallback, useState } from "react";
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import { useCallback } from "react";
+import { ColorValue, ImageBackground, StyleSheet, Text, View } from "react-native";
 import { colors } from "../styles";
 
-const coffeeShopImage = require("../assets/images/decks/coffeeshop.jpg");
+/**
+ * Image src
+ */
+const coffeeItems = require("../assets/images/decks/coffee-items.jpg");
 
 /**
  * ChooseCardDeck component
  */
 export default function ChooseCardDeck() {
   const { cardDeckDispatch } = useCardDeck();
-  const [hasDeck, setHasDeck] = useState<boolean>(false);
+  const {
+    title,
+    description,
+    CEFR,
+  } = DeckCoffeeShop;
+
+  const CEFRGradient: readonly [ColorValue, ColorValue] = [
+    colors.light.CEFR[CEFR[0]],
+    colors.light.CEFR[CEFR.at(-1)!],
+  ];
 
   /**
    * Destructure styles
    */
   const {
-    cardGrid,
-    card,
-    imageBackground,
-    textContainer,
-    title,
-    description,
-    selectButton,
-    selectButtonText,
-    cardInner
+    cardGridStyle,
+    cardStyle,
+    cardInnerStyle,
+    cardHeaderStyle,
+    titleContainer,
+    titleStyle,
+    CEFRGradientStyle,
+    CEFRLabelStyle,
+    CEFRTextStyle,
+    descriptionStyle,
+    imageBackgroundStyle,
+    cardFooterStyle,
   } = styles;
 
   /**
@@ -40,7 +56,6 @@ export default function ChooseCardDeck() {
 
     if (deck) {
       cardDeckDispatch({ type: 'SET_DECK', payload: deck });
-      setHasDeck(true);
       router.push('/CardDeck');
     }
   }, [cardDeckDispatch]);
@@ -49,18 +64,28 @@ export default function ChooseCardDeck() {
    * Render the card grid
    */
   return (
-    <View style={cardGrid}>
-      <View style={card}>
-        <View style={cardInner}>
-          <ImageBackground source={coffeeShopImage} style={imageBackground} />
-          <View style={textContainer}>
-            <Text style={title}>Coffee Shop</Text>
-            <Text style={description}>POV you{'\''}re in a coffee shop!</Text>
-            <LinkButton
-              handler={() => handleDeckSelect(DeckCoffeeShop)}
-              style={selectButton}
-            >
-              <Text style={selectButtonText}>Review →</Text>
+    <View style={cardGridStyle}>
+      <View style={cardStyle}>
+        <View style={cardInnerStyle}>
+          <View style={cardHeaderStyle}>
+            <View style={titleContainer}>
+              <Text style={titleStyle}>{title}</Text>
+              <LinearGradient
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                colors={CEFRGradient}
+                style={CEFRGradientStyle}
+              >
+                <Text style={CEFRLabelStyle}>CEFR</Text>
+                <Text style={CEFRTextStyle}>{CEFR.join(' - ')}</Text>
+              </LinearGradient>
+            </View>
+            <Text style={descriptionStyle}>{description}</Text>
+          </View>
+          <ImageBackground source={coffeeItems} style={imageBackgroundStyle} />
+          <View style={cardFooterStyle}>
+            <LinkButton handler={() => handleDeckSelect(DeckCoffeeShop)}>
+              <Text>Review this deck →</Text>
             </LinkButton>
           </View>
         </View>
@@ -73,46 +98,89 @@ export default function ChooseCardDeck() {
  * Styles
  */
 const styles = StyleSheet.create({
-  cardGrid: {
+  cardGridStyle: {
     display: 'flex',
     gap: 8,
   },
-  card: {
-    margin: 8
+  cardStyle: {
+    margin: 32
   },
-  cardInner: {
-    overflow: 'hidden',
-    borderRadius: 8,
-    borderColor: colors.light.background,
-    boxShadow: `0 8px 0 0 ${colors.dark.border}`
-  },
-  imageBackground: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    height: 180
-  },
-  textContainer: {
+  cardInnerStyle: {
     backgroundColor: colors.light.background,
-    paddingRight: 8,
-    paddingLeft: 8,
-    padding: 16,
-    gap: 8,
-    display: 'flex',
+    overflow: 'hidden',
+    borderRadius: 16,
+    borderWidth: 4,
+    borderColor: colors.light.border,
+    boxShadow: `0 16px 0 ${colors.dark.border}`
   },
-  title: {
+  cardHeaderStyle: {
+    display: 'flex',
+    borderBottomWidth: 2,
+    borderColor: colors.light.border
+  },
+  titleContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    maxWidth: '100%',
+  },
+  titleStyle: {
     color: colors.dark.text,
     fontSize: 20,
     fontWeight: 800,
+    paddingLeft: 12,
+    wordWrap: 'wrap',
+    flexShrink: 1,
+    paddingTop: 8,
   },
-  description: {
+  CEFRGradientStyle: {
+    overflow: 'hidden',
+    alignSelf: 'flex-start',
+    paddingLeft: 4,
+    paddingRight: 4,
+    flexShrink: 1,
+    borderBottomLeftRadius: 8,
+    borderRadius: 8,
+    borderTopWidth: 0,
+    borderRightWidth: 0,
+    borderTopLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    borderColor: colors.dark.border,
+    borderWidth: 1,
+  },
+  CEFRLabelStyle: {
+    fontSize: 10,
+    paddingLeft: 8,
+    paddingTop: 2,
+    fontWeight: 800,
+  },
+  CEFRTextStyle: {
+    fontWeight: 600,
+    fontSize: 16,
+    color: colors.dark.text,
+    paddingTop: 0,
+    paddingLeft: 8,
+    paddingRight: 8,
+    padding: 4,
+  },
+  descriptionStyle: {
     color: colors.dark.text,
     wordWrap: 'wrap',
     fontSize: 16,
-    fontWeight: 600
+    fontWeight: 600,
+    padding: 12,
+    paddingTop: 8
   },
-  selectButton: {
-    margin: 8
+  imageBackgroundStyle: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    height: 200,
   },
-  selectButtonText: {
-  }
+  cardFooterStyle: {
+    padding: 12,
+    paddingBottom: 20,
+    borderTopWidth: 2,
+    borderColor: colors.light.border
+  },
 })
