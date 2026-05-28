@@ -1,6 +1,6 @@
-import { CardDeck } from '@/data/french/decks/deckTyps';
 import { CardDeckStateProps } from '@/src/components/CardDeck/cardDeckContext';
 import { cardDeckReducer } from '@/src/components/CardDeck/cardDeckReducer';
+import type { CardDeck } from '@/src/components/CardDeck/cardDeckTypes';
 import { Word } from '@/src/components/CardDeck/cardDeckTypes';
 
 /**
@@ -45,6 +45,7 @@ function mockDeck(words: Word[]): CardDeck {
 		description: 'A deck for tests',
 		CEFR: ['A1'],
 		wordIds: words.map(word => word.id),
+		progress: {},
 		words,
 	};
 }

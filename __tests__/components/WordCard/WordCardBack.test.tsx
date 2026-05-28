@@ -38,6 +38,7 @@ describe('<WordCardBack />', () => {
           description: 'A deck for tests',
           CEFR: ['A1'],
           wordIds: ['word_noun_cafe'],
+          progress: {},
           words: [],
         },
       },

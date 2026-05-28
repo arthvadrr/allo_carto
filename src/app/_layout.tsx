@@ -65,6 +65,10 @@ export default function AppLayout() {
                 headerBackTitle: 'Home',
                 headerTitle: 'Choose a Deck'
               }} />
+              <Stack.Screen name="(routes)/FinishedDeck" options={{
+                headerShown: false,
+                headerTitle: 'Deck finished!'
+              }} />
             </Stack>
           </SQLiteProvider>
         </Suspense>
