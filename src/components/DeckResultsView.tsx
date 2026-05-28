@@ -1,5 +1,5 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { StyleSheet, Text, View } from "react-native";
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { colors } from "../app/styles";
 import type { Word } from "./CardDeck/cardDeckTypes";
 import { useCardDeck } from "./CardDeck/useCardDeck";
@@ -18,12 +18,16 @@ export default function DeckResultsView() {
     wordsFlexRows,
     wordsListStyle,
     sectionTitleStyle,
+    imageBackgroundStyle,
     checkMarKContainerStyle,
     wordRowContainerStyle,
     wordRowStyle,
     frenchWordStyle,
     englishWordStyle,
-    CEFRStyle
+    CEFRStyle,
+    userScoreStyle,
+    successStyle,
+    dangerStyle
   } = styles;
 
   const { words } = cardDeckState.cardDeck;
@@ -34,12 +38,12 @@ export default function DeckResultsView() {
   return (
     <View style={resultsContainerStyle}>
       <View style={deckDetailsContainerStyle}>
-
+        <ImageBackground source={cardDeckState.cardDeck.image} style={imageBackgroundStyle} />
       </View>
       <View style={wordsFlexRows}>
         <View style={wordsListStyle}>
           <Text style={sectionTitleStyle}>Correct</Text>
-          {correctWords.length && correctWords.map((word: Word) => {
+          {correctWords.length > 0 && correctWords.map((word: Word) => {
             const {
               frenchWord,
               userScore,
@@ -53,12 +57,15 @@ export default function DeckResultsView() {
                   <MaterialIcons
                     name="check"
                     size={24}
-                    color="green"
+                    color={colors.dark.success}
                   />
                   <View style={wordRowStyle}>
                     <Text style={frenchWordStyle}>{frenchWord}</Text>
-                    <Text style={englishWordStyle}>{englishWords.join(', ')}</Text>
+                    <Text style={[englishWordStyle, successStyle]}>{englishWords.join(', ')}</Text>
                   </View>
+                </View>
+                <View style={userScoreStyle}>
+                  <Text></Text>
                 </View>
                 <Text style={[CEFRStyle, { backgroundColor: colors.light.CEFR[CEFR] }]}>{CEFR}</Text>
               </View>
@@ -68,19 +75,32 @@ export default function DeckResultsView() {
         </View>
         <View style={wordsListStyle}>
           <Text style={sectionTitleStyle}>Incorrect</Text>
-          {incorrectWords.map((word: Word) => {
-            const { frenchWord, userScore, CEFR } = word;
+          {incorrectWords.length > 0 && incorrectWords.map((word: Word) => {
+            const {
+              frenchWord,
+              userScore,
+              englishWords,
+              CEFR
+            } = word;
 
             return (
-              <View key={`${frenchWord}-${userScore}`}>
-                <View style={wordRowStyle}>
-                  <Text style={frenchWordStyle}>{frenchWord}</Text>
-                  <Text>{CEFR}</Text>
+              <View key={`${frenchWord}-${userScore}`} style={wordRowContainerStyle}>
+                <View style={checkMarKContainerStyle}>
+                  <MaterialIcons
+                    name="check"
+                    size={24}
+                    color={colors.dark.danger}
+                  />
+                  <View style={wordRowStyle}>
+                    <Text style={frenchWordStyle}>{frenchWord}</Text>
+                    <Text style={[englishWordStyle, dangerStyle]}>{englishWords.join(', ')}</Text>
+                  </View>
                 </View>
+                <Text style={[CEFRStyle, { backgroundColor: colors.light.CEFR[CEFR] }]}>{CEFR}</Text>
               </View>
             );
           })}
-          {incorrectWords.length === 0 && <Text>Nothing incorrect.{'\n'}Good job!</Text>}
+          {incorrectWords.length === 0 && <Text>You got every word correct, nicely done!</Text>}
         </View>
       </View>
     </View>
@@ -96,33 +116,36 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light.background,
   },
   deckDetailsContainerStyle: {
+  },
+  imageBackgroundStyle: {
 
   },
   wordsFlexRows: {
-
+    display: 'flex',
+    gap: 16,
+    padding: 16,
   },
   wordRowContainerStyle: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     borderBottomWidth: 1,
-    padding: 8,
-    gap: 20,
+    borderColor: colors.light.border,
+    padding: 4,
   },
   wordRowStyle: {
     padding: 4,
-    paddingLeft: 0,
-    paddingRight: 0,
   },
   checkMarKContainerStyle: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8
+    gap: 2
   },
   sectionTitleStyle: {
-    fontSize: 24,
-    fontWeight: 700
+    fontSize: 18,
+    fontWeight: 800,
+    color: colors.dark.text
   },
   wordsListStyle: {
     display: 'flex',
@@ -135,15 +158,22 @@ const styles = StyleSheet.create({
   },
   englishWordStyle: {
     fontSize: 16,
-    fontWeight: 700,
+    fontWeight: 800,
+  },
+  successStyle: {
     color: colors.dark.success
   },
-  CEFRStyle: {
-    fontSize: 12,
-    borderRadius: 4,
-    padding: 4,
+  dangerStyle: {
+    color: colors.dark.danger
   },
   userScoreStyle: {
 
-  }
+  },
+  CEFRStyle: {
+    fontSize: 12,
+    padding: 4,
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: colors.light.border
+  },
 })
