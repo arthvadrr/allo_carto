@@ -1,4 +1,5 @@
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import type { Word } from "./CardDeck/cardDeckTypes";
 import { useCardDeck } from "./CardDeck/useCardDeck";
 
 /**
@@ -7,12 +8,48 @@ import { useCardDeck } from "./CardDeck/useCardDeck";
 export default function FinishedDeckView() {
   const { cardDeckState } = useCardDeck();
 
-  /**
-   * Render the view
-   */
+  const {
+    containerStyle,
+    wordsContainerStyle,
+    frenchWordStyle,
+    userScoreStyle
+  } = styles;
+
+  const { words } = cardDeckState.cardDeck;
+
+  console.log('THE THING WE BE MAPPIN', words);
+
   return (
-    <View>
-      <Text>Finished deck! {cardDeckState.cardDeck.words.length}</Text>
+    <View style={containerStyle}>
+      {words.map((word: Word) => {
+        const { frenchWord, userScore } = word;
+
+        console.log('FRENCHWORD', frenchWord);
+
+        return (
+          <View key={`${frenchWord}-${userScore}`} style={wordsContainerStyle}>
+            <Text style={frenchWordStyle}>{frenchWord}</Text>
+            <Text style={userScoreStyle}>{userScore}</Text>
+          </View>
+        );
+      })}
     </View>
   )
 }
+
+/**
+ * Styles
+ */
+const styles = StyleSheet.create({
+  containerStyle: {
+    display: 'flex',
+  },
+  wordsContainerStyle: {
+  },
+  frenchWordStyle: {
+
+  },
+  userScoreStyle: {
+
+  }
+})
