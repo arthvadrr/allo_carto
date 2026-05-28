@@ -10,11 +10,6 @@ import type { CardDeck } from "./CardDeck/cardDeckTypes";
 import GradientText from "./GradientText";
 
 /**
- * Image src
- */
-const coffeeHouse = require("@/src/app/assets/images/decks/coffee-house.jpg");
-
-/**
  * Typing
  */
 interface ChooseCardDeckProps {
@@ -30,6 +25,7 @@ export default function DeckBox({ deck }: ChooseCardDeckProps) {
     title,
     description,
     CEFR,
+    image
   } = deck;
 
   const CEFRGradient: readonly [ColorValue, ColorValue] = [
@@ -98,7 +94,7 @@ export default function DeckBox({ deck }: ChooseCardDeckProps) {
           </View>
           <Text style={descriptionStyle}>{description}</Text>
         </View>
-        <ImageBackground source={coffeeHouse} style={imageBackgroundStyle} />
+        <ImageBackground source={image} style={imageBackgroundStyle} />
         <View style={cardFooterStyle}>
           <LinkButton handler={() => handleDeckSelect(deck)}>
             <Text>Review this deck →</Text>
