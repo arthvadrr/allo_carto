@@ -32,7 +32,6 @@ export const initialCardDeckState: CardDeckStateProps = {
 		CEFR: [],
 		wordIds: [],
 		words: [initialWordState],
-		progress: {},
 	},
 };
 

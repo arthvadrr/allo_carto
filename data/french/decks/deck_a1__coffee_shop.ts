@@ -13,7 +13,6 @@ export const DeckCoffeeShop: CardDeck = {
 		'Explore french where water meets beans. Words related to everything in a coffee house.',
 	CEFR: ['A1', 'A2'],
 	words: [],
-	progress: {},
 	wordIds: [
 		'word_interjection_salut',
 		'word_noun_cafe',

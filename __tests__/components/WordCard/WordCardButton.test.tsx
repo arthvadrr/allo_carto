@@ -47,7 +47,6 @@ function mockDeckState(cardDeckDispatch = jest.fn()) {
         description: 'A deck for tests',
         CEFR: ['A1'],
         wordIds: [currentCard.id],
-        progress: {},
         words: [currentCard],
       },
     },

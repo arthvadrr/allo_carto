@@ -40,7 +40,6 @@ function makeDeck(words: Word[]): CardDeck {
     description: 'A deck for tests',
     CEFR: ['A1'],
     wordIds: words.map((word) => word.id),
-    progress: {},
     words,
   };
 }
