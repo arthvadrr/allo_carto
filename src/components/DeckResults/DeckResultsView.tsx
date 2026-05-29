@@ -22,6 +22,7 @@ export default function DeckResultsView() {
    */
   const {
     titleStyle,
+    titleRowStyle,
     deckDetailsContainerStyle,
     resultsContainerStyle,
     wordsFlexRows,
@@ -35,15 +36,16 @@ export default function DeckResultsView() {
     <View style={resultsContainerStyle}>
       <View style={deckDetailsContainerStyle}>
         <View>
-          <Text style={titleStyle}>Good jobe! You completed the
+          <View style={titleRowStyle}>
+            <Text style={titleStyle}>Good job! You completed the </Text>
             <GradientText
               text='Coffee Shop'
               colors={[colors.dark.primary, colors.dark.text]}
               fontSize={22}
               fontWeight={700}
             />
-            deck.
-          </Text>
+            <Text style={titleStyle}> deck.</Text>
+          </View>
         </View>
         <ImageBackground source={cardDeckState.cardDeck.image} style={imageBackgroundStyle} />
       </View>
@@ -78,6 +80,11 @@ const styles = StyleSheet.create({
   titleStyle: {
     fontSize: 22,
     fontWeight: 700,
+  },
+  titleRowStyle: {
+    alignItems: 'baseline',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   imageBackgroundStyle: {
     height: 200
