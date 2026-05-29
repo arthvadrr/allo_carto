@@ -1,4 +1,4 @@
-import DeckResultsView from "@/src/components/DeckResultsView";
+import DeckResultsView from "@/src/components/DeckResults/DeckResultsView";
 
 /**
  * Route wrapper for the finished deck view
