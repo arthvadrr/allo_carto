@@ -1,8 +1,9 @@
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native';
 import colors from "../../app/styles";
 import type { Word } from "../CardDeck/cardDeckTypes";
 import { useCardDeck } from "../CardDeck/useCardDeck";
 import GradientText from '../GradientText';
+import LinkButton from '../LinkButton';
 import ResultsList from './ResultsList';
 
 /**
@@ -26,40 +27,50 @@ export default function DeckResultsView() {
     deckDetailsContainerStyle,
     resultsContainerStyle,
     wordsFlexRows,
-    imageBackgroundStyle,
+    imageContainerStyle,
+    imageStyle,
+    finishedLinkStyle
   } = styles;
 
   /**
    * Render the deck results
    */
   return (
-    <View style={resultsContainerStyle}>
-      <View style={deckDetailsContainerStyle}>
-        <View>
-          <View style={titleRowStyle}>
-            <Text style={titleStyle}>Good job! You completed the </Text>
-            <GradientText
-              text='Coffee Shop'
-              colors={[colors.dark.primary, colors.dark.text]}
-              fontSize={22}
-              fontWeight={700}
+    <ScrollView>
+      <View style={resultsContainerStyle}>
+        <View style={deckDetailsContainerStyle}>
+          <View>
+            <View style={titleRowStyle}>
+              <Text style={titleStyle}>Good job! You completed a </Text>
+              <GradientText
+                text='Coffee Shop'
+                colors={[colors.dark.primary, colors.dark.text]}
+                fontSize={20}
+                fontWeight={700}
+              />
+              <Text style={titleStyle}> deck.</Text>
+            </View>
+          </View>
+          <View style={imageContainerStyle}>
+            <ImageBackground
+              source={cardDeckState.cardDeck.image}
+              style={imageStyle}
             />
-            <Text style={titleStyle}> deck.</Text>
           </View>
         </View>
-        <ImageBackground source={cardDeckState.cardDeck.image} style={imageBackgroundStyle} />
+        <View style={wordsFlexRows}>
+          <ResultsList
+            wordArr={correctWords}
+            isCorrect={true}
+          />
+          <ResultsList
+            wordArr={incorrectWords}
+            isCorrect={false}
+          />
+        </View>
+        <LinkButton screen="(tabs)" style={finishedLinkStyle}>Finish</LinkButton>
       </View>
-      <View style={wordsFlexRows}>
-        <ResultsList
-          wordArr={correctWords}
-          isCorrect={true}
-        />
-        <ResultsList
-          wordArr={incorrectWords}
-          isCorrect={false}
-        />
-      </View>
-    </View>
+    </ScrollView>
   )
 }
 
@@ -72,26 +83,38 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light.background,
     margin: 32,
     borderRadius: 16,
-    boxShadow: `0 16px 0 ${colors.dark.border}`
+    boxShadow: `0 16px 0 ${colors.dark.border}`,
+    overflow: 'hidden',
+    borderWidth: 6,
+    borderColor: colors.light.border,
   },
   deckDetailsContainerStyle: {
 
-  },
-  titleStyle: {
-    fontSize: 22,
-    fontWeight: 700,
   },
   titleRowStyle: {
     alignItems: 'baseline',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    padding: 8
   },
-  imageBackgroundStyle: {
-    height: 200
+  titleStyle: {
+    fontSize: 20,
+    fontWeight: 700,
+  },
+  imageContainerStyle: {
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
+    borderColor: colors.light.border
+  },
+  imageStyle: {
+    height: 200,
   },
   wordsFlexRows: {
     display: 'flex',
     gap: 8,
     padding: 16,
   },
+  finishedLinkStyle: {
+    margin: 16
+  }
 })
