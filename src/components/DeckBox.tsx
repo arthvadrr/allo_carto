@@ -76,10 +76,7 @@ export default function DeckBox({ deck }: ChooseCardDeckProps) {
                 text={title}
                 fontSize={20}
                 style={titleStyle}
-                colors={[
-                  colors.dark.primary,
-                  colors.dark.text,
-                ]}
+                colors={[colors.dark.primary, colors.dark.text]}
               />
             </View>
             <LinearGradient

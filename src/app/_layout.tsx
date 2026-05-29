@@ -19,7 +19,8 @@ export default function AppLayout() {
   const [cardDeckState, cardDeckDispatch] = useReducer(cardDeckReducer, initialCardDeckState);
 
   useFonts({
-    'lexend-variable': require('./assets/fonts/lexend-variable.ttf')
+    'lexend-variable': require('./assets/fonts/lexend-variable.ttf'),
+    'red-hat-variable': require('./assets/fonts/red-hat-variable.ttf'),
   });
 
   /**

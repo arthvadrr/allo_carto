@@ -2,7 +2,9 @@ import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import colors from "../../app/styles";
 import type { Word } from "../CardDeck/cardDeckTypes";
 import { useCardDeck } from "../CardDeck/useCardDeck";
+import GradientText from '../GradientText';
 import ResultsList from './ResultsList';
+
 /**
  * DeckResultsView component
  * 
@@ -32,7 +34,17 @@ export default function DeckResultsView() {
   return (
     <View style={resultsContainerStyle}>
       <View style={deckDetailsContainerStyle}>
-        <Text style={titleStyle}>Great work!</Text>
+        <View>
+          <Text style={titleStyle}>Good jobe! You completed the
+            <GradientText
+              text='Coffee Shop'
+              colors={[colors.dark.primary, colors.dark.text]}
+              fontSize={22}
+              fontWeight={700}
+            />
+            deck.
+          </Text>
+        </View>
         <ImageBackground source={cardDeckState.cardDeck.image} style={imageBackgroundStyle} />
       </View>
       <View style={wordsFlexRows}>
@@ -56,25 +68,23 @@ const styles = StyleSheet.create({
   resultsContainerStyle: {
     display: 'flex',
     backgroundColor: colors.light.background,
-    margin: 16,
-    borderRadius: 16
+    margin: 32,
+    borderRadius: 16,
+    boxShadow: `0 16px 0 ${colors.dark.border}`
   },
   deckDetailsContainerStyle: {
 
   },
   titleStyle: {
-    fontSize: 24,
-    fontWeight: 800,
-    textAlign: 'center',
-    padding: 8,
-
+    fontSize: 22,
+    fontWeight: 700,
   },
   imageBackgroundStyle: {
     height: 200
   },
   wordsFlexRows: {
     display: 'flex',
-    gap: 16,
+    gap: 8,
     padding: 16,
   },
 })

@@ -77,7 +77,7 @@ export default function ResultsList({ isCorrect, wordArr }: ResultsListProps) {
       })}
       {wordArr.length === 0 && <Text>Wow, you need practice!</Text>}
     </View>
-  )
+  );
 }
 
 /**
@@ -86,8 +86,9 @@ export default function ResultsList({ isCorrect, wordArr }: ResultsListProps) {
 const styles = StyleSheet.create({
   sectionTitleStyle: {
     fontSize: 18,
-    fontWeight: 700,
-    color: colors.dark.text
+    fontWeight: 800,
+    color: colors.dark.text,
+    marginBottom: 2
   },
   wordRowContainerStyle: {
     flexDirection: 'row',
@@ -95,13 +96,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomWidth: 1,
     borderColor: colors.light.border,
-    padding: 4,
+    paddingTop: 1,
+    paddingBottom: 1
   },
   checkMarKContainerStyle: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 2
+    gap: 4
   },
   wordRowStyle: {
     padding: 2,
@@ -112,7 +114,7 @@ const styles = StyleSheet.create({
     padding: 4,
   },
   frenchWordStyle: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 400
   },
   englishWordStyle: {
@@ -129,10 +131,12 @@ const styles = StyleSheet.create({
 
   },
   CEFRStyle: {
+    fontFamily: 'red-hat-variable',
     fontSize: 12,
-    padding: 4,
+    padding: 2,
     borderRadius: 4,
     borderWidth: 1,
-    borderColor: colors.light.border
+    borderColor: colors.light.border,
+    boxShadow: `0 2px 0 0 ${colors.light.border}`
   }
 });
