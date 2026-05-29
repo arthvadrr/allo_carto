@@ -7,7 +7,7 @@ import {
   useSharedValue,
   withTiming
 } from 'react-native-reanimated';
-import { colors } from "../../app/styles";
+import colors from "../../app/styles";
 import { CardDeckContext } from '../CardDeck/cardDeckContext';
 import { sharedWordCardStyles } from './sharedWordCardStyles';
 import { useWordCardUI } from './useWordCardUI';

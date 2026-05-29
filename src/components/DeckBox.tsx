@@ -5,7 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { router } from 'expo-router';
 import { useCallback } from "react";
 import { ColorValue, ImageBackground, StyleSheet, Text, View } from "react-native";
-import { colors } from "../app/styles";
+import colors from "../app/styles";
 import type { CardDeck } from "./CardDeck/cardDeckTypes";
 import GradientText from "./GradientText";
 
