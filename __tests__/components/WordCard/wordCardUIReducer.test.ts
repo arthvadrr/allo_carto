@@ -155,14 +155,14 @@ describe('wordCardUIReducer', () => {
 	});
 
 	/**
-	 * Wrong and out of tries. Yes, dead. No point 4 u.
+	 * Wrong and out of tries. No point 4 u.
 	 */
 	test('marks an answer incorrect when max attempts are gone', () => {
 		const state = makeState({
 			selectedArticle: 'A',
 			selectedWord: 'tea',
 			attempts: 1,
-			maxAttempts: 2,
+			maxAttempts: 1,
 		});
 
 		const nextState = wordCardUIReducer(state, {
