@@ -134,12 +134,13 @@ describe('wordCardUIReducer', () => {
 	});
 
 	/**
-	 * Wrong but not dead yet
+	 * Wrong
 	 */
 	test('warns when the answer is wrong but attempts remain', () => {
 		const state = makeState({
 			selectedArticle: 'A',
 			selectedWord: 'tea',
+			maxAttempts: 2,
 		});
 
 		const nextState = wordCardUIReducer(state, {
@@ -161,7 +162,6 @@ describe('wordCardUIReducer', () => {
 		const state = makeState({
 			selectedArticle: 'A',
 			selectedWord: 'tea',
-			attempts: 1,
 			maxAttempts: 1,
 		});
 
@@ -173,7 +173,7 @@ describe('wordCardUIReducer', () => {
 		expect(nextState.stage).toBe('INCORRECT');
 		expect(nextState.progress).toBe('DANGER');
 		expect(nextState.mistake).toBe('BOTH');
-		expect(nextState.attempts).toBe(2);
+		expect(nextState.attempts).toBe(1);
 		expect(nextState.feedbackKey).toBe('INCORRECT_DANGER_BOTH');
 	});
 
