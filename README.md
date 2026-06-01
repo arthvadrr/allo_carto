@@ -84,6 +84,7 @@ Real quick so I don't forget...
 - Word cards/decks and phrases will be separate
 - accessibility roles
 - Deck categorization
+- Filler words needs a new db method
 
 ## Free art and assets credits
 
