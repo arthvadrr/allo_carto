@@ -2,13 +2,14 @@ import { ThemeProvider } from "@react-navigation/native";
 import { useFonts } from 'expo-font';
 import { Stack } from "expo-router";
 import { SQLiteProvider } from "expo-sqlite";
-import { Suspense, useState } from "react";
-import { CardDeckContext } from "../components/CardDeck/cardDeckContext";
-import { useCardDeck } from "../components/CardDeck/useCardDeck";
+import { Suspense, useReducer, useState } from "react";
+import { CardDeckContext, initialCardDeckState } from "../components/CardDeck/cardDeckContext";
+import { cardDeckReducer } from "../components/CardDeck/cardDeckReducer";
 import Loader from "../components/Loader";
 import { getDB, getTables } from "../db/interface";
 import getMonHomme, { UserRow } from "../db/queries/getMonHomme";
 import { UserContext } from "../db/userContext";
+
 import alloTheme from './alloTheme';
 
 /**
@@ -22,7 +23,7 @@ export default function AppLayout() {
   /**
    * State
    */
-  const { cardDeckState, cardDeckDispatch } = useCardDeck();
+  const [cardDeckState, cardDeckDispatch] = useReducer(cardDeckReducer, initialCardDeckState);
   const [user, setUser] = useState<UserRow | null>(null);
 
   /**

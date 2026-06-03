@@ -130,14 +130,12 @@ export default function WordCard({ isCurrent }: WordCardProps) {
    * and the user hits the 'Next Card ->' button.
    */
   useEffect(() => {
-    if (
-      isCurrent &&
-      cardState.stage === 'COMPLETED' &&
-      cardDeckState.currentIndex === cardDeckState.cardDeck.words.length - 1
-    ) {
-      router.push('/DeckResults');
-    } else {
-      cardDeckDispatch({ type: 'NEXT_CARD' });
+    if (isCurrent && cardState.stage === 'COMPLETED') {
+      if (cardDeckState.currentIndex === cardDeckState.cardDeck.words.length - 1) {
+        router.push('/DeckResults');
+      } else {
+        cardDeckDispatch({ type: 'NEXT_CARD' });
+      }
     }
   }, [
     cardDeckState,
