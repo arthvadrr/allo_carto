@@ -59,14 +59,14 @@ export async function getDB(): Promise<SQLite.SQLiteDatabase> {
 	}
 }
 
-async function logThisIfItFails<T>(
-	label: string,
+export async function logThisIfItFails<T>(
+	message: string,
 	fn: () => Promise<T>,
 ): Promise<T> {
 	try {
 		return await fn();
 	} catch (error) {
-		console.error(`DB step failed: ${label}`, error);
+		console.error(`DB step failed: ${message}`, error);
 		throw error;
 	}
 }
