@@ -39,7 +39,7 @@ describe('<WordCardHeader />', () => {
       englishWords: ['coffee'],
       pronunciation: 'ka-fay',
       isVulgar: false,
-      CEFR: 'A1' as const,
+      CEFR: 'A1',
       correctCount: 14,
     };
 
