@@ -1,4 +1,8 @@
 import { useCardDeck } from '@/src/components/CardDeck/useCardDeck';
+import {
+  makeMockCardDeck,
+  makeMockCardDeckState,
+} from '@/src/components/CardDeck/mockCardDeck';
 import WordCardButton from '@/src/components/WordCard/WordCardButton';
 import { useWordCardUI } from '@/src/components/WordCard/useWordCardUI';
 import { initialWordCardState } from '@/src/components/WordCard/wordCardContext';
@@ -42,19 +46,11 @@ function mockDeckState(cardDeckDispatch = jest.fn()) {
   };
 
   mockUseCardDeck.mockReturnValue({
-    cardDeckState: {
+    cardDeckState: makeMockCardDeckState({
       currentIndex: 0,
       currentId: currentCard.id,
-      cardDeck: {
-        title: 'Testing deck',
-        description: 'A deck for tests',
-        CEFR: ['A1'],
-        image: undefined,
-        wordIds: [currentCard.id],
-        words: [currentCard],
-        wordChoices: [],
-      },
-    },
+      cardDeck: makeMockCardDeck({ words: [currentCard] }),
+    }),
     cardDeckDispatch,
     currentCard,
   });

@@ -1,4 +1,8 @@
 import { useCardDeck } from '@/src/components/CardDeck/useCardDeck';
+import {
+  makeMockCardDeck,
+  makeMockCardDeckState,
+} from '@/src/components/CardDeck/mockCardDeck';
 import MappedWords from '@/src/components/WordCard/MappedWords';
 import { useWordCardUI } from '@/src/components/WordCard/useWordCardUI';
 import { initialWordCardState } from '@/src/components/WordCard/wordCardContext';
@@ -17,31 +21,25 @@ const mockUseWordCardUI = jest.mocked(useWordCardUI);
  */
 describe('<MappedWords />', () => {
   beforeEach(() => {
+    const currentCard = {
+      id: 'word_noun_cafe',
+      frenchWord: 'cafe',
+      englishArticle: 'The',
+      englishWords: ['coffee'],
+      pronunciation: 'ka-fay',
+      isVulgar: false,
+      CEFR: 'A1' as const,
+      correctCount: 14,
+    };
+
     mockUseCardDeck.mockReturnValue({
-      cardDeckState: {
+      cardDeckState: makeMockCardDeckState({
         currentIndex: 0,
-        currentId: 'word_noun_cafe',
-        cardDeck: {
-          title: 'Testing deck',
-          description: 'A deck for tests',
-          CEFR: ['A1'],
-          wordIds: ['word_noun_cafe'],
-          image: undefined,
-          words: [],
-          wordChoices: [],
-        },
-      },
+        currentId: currentCard.id,
+        cardDeck: makeMockCardDeck({ words: [currentCard] }),
+      }),
       cardDeckDispatch: jest.fn(),
-      currentCard: {
-        id: 'word_noun_cafe',
-        frenchWord: 'cafe',
-        englishArticle: 'The',
-        englishWords: ['coffee'],
-        pronunciation: 'ka-fay',
-        isVulgar: false,
-        CEFR: 'A1',
-        correctCount: 14,
-      },
+      currentCard,
     });
 
     /**
