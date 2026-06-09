@@ -44,6 +44,7 @@ describe('<WordCardFront />', () => {
           image: undefined,
           wordIds: ['word_noun_cafe'],
           words: [],
+          wordChoices: [],
         },
       },
       cardDeckDispatch: jest.fn(),

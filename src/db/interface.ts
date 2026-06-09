@@ -3,6 +3,7 @@ import * as SQLite from 'expo-sqlite';
 import type { CardDeck } from '../components/CardDeck/cardDeckTypes';
 import { CardRarity, CEFR, Word } from '../components/CardDeck/cardDeckTypes';
 import shuffleArray from '../util/shuffleArray';
+import getDeckWordChoices from './queries/getDeckWordChoices';
 
 /**
  * Typing
@@ -372,6 +373,7 @@ export async function getDeck({
 		return {
 			...deck,
 			words: withUniquecorrectCounts,
+			wordChoices: await getDeckWordChoices({ wordIds: deck.wordIds }),
 		};
 	} catch (error) {
 		console.error('Could not retrieve deck:', error);

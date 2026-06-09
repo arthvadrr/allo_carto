@@ -52,6 +52,7 @@ function mockDeckState(cardDeckDispatch = jest.fn()) {
         image: undefined,
         wordIds: [currentCard.id],
         words: [currentCard],
+        wordChoices: [],
       },
     },
     cardDeckDispatch,

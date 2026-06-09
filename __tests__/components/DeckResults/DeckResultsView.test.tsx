@@ -64,6 +64,7 @@ describe('<DeckResultsView />', () => {
             'word_noun_cafe',
             'word_noun_the',
           ],
+          wordChoices: [],
           words: [
             {
               id: 'word_noun_cafe',

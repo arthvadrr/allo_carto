@@ -47,6 +47,7 @@ function mockDeck(words: Word[]): CardDeck {
 		wordIds: words.map(word => word.id),
 		image: undefined,
 		words,
+		wordChoices: [],
 	};
 }
 

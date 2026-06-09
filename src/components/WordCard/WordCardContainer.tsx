@@ -43,6 +43,7 @@ export default function WordCardContainer({ word, isCurrent }: CardContainerProp
   useEffect(() => {
     async function loadWords() {
       setFillerWords(await getFillerWords({
+        //TODO Here is where you will pass in the decks set of "correct" words
         correctWords: word.englishWords
       }));
 

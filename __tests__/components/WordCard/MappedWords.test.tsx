@@ -28,6 +28,7 @@ describe('<MappedWords />', () => {
           wordIds: ['word_noun_cafe'],
           image: undefined,
           words: [],
+          wordChoices: [],
         },
       },
       cardDeckDispatch: jest.fn(),
