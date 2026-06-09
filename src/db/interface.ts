@@ -258,6 +258,8 @@ export async function getDeck({
 	/**
 	 * Get the DB
 	 * Select all the words in that deck (deck.wordIds)
+	 * ORDER BY RANDOM() is important so that the user
+	 * doesn't get the same set of cards each time.
 	 */
 	try {
 		const database = await getDB();
@@ -266,6 +268,7 @@ export async function getDeck({
 			SELECT *
 			FROM words
 			WHERE id IN (${quests});
+			ORDER BY RANDOM();
 			`,
 			deck.wordIds,
 		);
@@ -325,7 +328,7 @@ export async function getDeck({
 		 * In other words, we're turning this:
 		 * [{"correctCount": 1, "seenCount": 0, "wordId": "word_noun_cafe"}, ...]
 		 *
-		 * Into a lookup table:
+		 * Into this (a lookup table):
 		 * {word_noun_cafe: {"correctCount": 1, "seenCount": 0, "wordId": "word_noun_cafe"}, ...}
 		 *
 		 * This prevents us from having to iterate over
@@ -339,21 +342,16 @@ export async function getDeck({
 		}
 
 		/**
-		 * Shuffle!
+		 * Shuffle and slice!
 		 */
-		const shuffledUniqueLemmaWords = shuffleArray(slicedWords);
-
-		/**
-		 * Slice to the amount
-		 */
-		const slicedShuffledWords = shuffledUniqueLemmaWords.slice(0, amount);
+		const shlicedUniqueLemmaWords = shuffleArray(slicedWords).slice(0, amount);
 
 		/**
 		 * Add in the correctCount/correctCounts
 		 * These can be undefined if they have
 		 * never been seen by the user.
 		 */
-		const withUniquecorrectCounts = slicedShuffledWords.map(
+		const withUniquecorrectCounts = shlicedUniqueLemmaWords.map(
 			(word: Word): Word => {
 				const wordRankRow: WordRankRow | undefined = keyedRankRows[word.id];
 				const correctCount: number = wordRankRow?.correctCount ?? 0;
