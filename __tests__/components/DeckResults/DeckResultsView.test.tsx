@@ -71,7 +71,7 @@ describe('<DeckResultsView />', () => {
         englishWords: ['tea'],
         pronunciation: 'tay',
         isVulgar: false,
-        CEFR: 'A1' as const,
+        CEFR: 'A1',
         correctCount: 0,
       },
     ];
