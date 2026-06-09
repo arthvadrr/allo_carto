@@ -244,11 +244,10 @@ interface GetDeckProps {
  * TODO:
  * Need to shuffle
  * Need to include lemma's that are unique
- * Need to limit amount
  */
 export async function getDeck({
 	deck,
-	amount,
+	amount = 6,
 	userId,
 }: GetDeckProps): Promise<CardDeck | undefined> {
 	/**
