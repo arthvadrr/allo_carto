@@ -65,7 +65,7 @@ describe('cardDeckReducer', () => {
 		const nextState = cardDeckReducer(state, { type: 'ADD_CORRECT_WORD' });
 
 		expect(nextState.correctWords).toEqual([firstWord]);
-		expect(nextState.incorrectWords).toEqual([]);
+		expect(nextState.incorrectWords).toEqual([firstWord]);
 	});
 
 	test('adds the current word to incorrect words', () => {
@@ -76,7 +76,7 @@ describe('cardDeckReducer', () => {
 
 		const nextState = cardDeckReducer(state, { type: 'ADD_INCORRECT_WORD' });
 
-		expect(nextState.correctWords).toEqual([]);
+		expect(nextState.correctWords).toEqual([firstWord]);
 		expect(nextState.incorrectWords).toEqual([firstWord]);
 	});
 
