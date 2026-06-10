@@ -21,12 +21,18 @@ export function sleep(ms: number | SharedValue<number>) {
 
 /**
  * This function gets filler words for the
- * user to select from when doing flash cards
+ * user to select from when doing flash cards.
+ *
+ * We can flatmap this since they're all words anyway.
  */
 export default async function getFillerWords({
 	amount = 8,
 	correctWords,
 	words,
 }: GetFillerWordsProps) {
-	return filterFillerWords({ amount, correctWords, words });
+	return filterFillerWords({
+		amount,
+		correctWords,
+		words,
+	});
 }

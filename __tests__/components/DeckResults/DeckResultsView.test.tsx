@@ -3,6 +3,7 @@ import {
   makeMockCardDeck,
   makeMockCardDeckState,
 } from '@/src/components/CardDeck/mockCardDeck';
+import { type Word } from '@/src/components/CardDeck/cardDeckTypes';
 import DeckResultsView from '@/src/components/DeckResults/DeckResultsView';
 import { useLinkProps } from '@react-navigation/native';
 import { fireEvent, render } from '@testing-library/react-native';
@@ -55,7 +56,7 @@ describe('<DeckResultsView />', () => {
   beforeEach(() => {
     mockLinkPress.mockClear();
     mockUseLinkProps.mockClear();
-    const words = [
+    const words: Word[] = [
       {
         id: 'word_noun_cafe',
         frenchWord: 'cafe',

@@ -3,6 +3,7 @@ import {
   makeMockCardDeck,
   makeMockCardDeckState,
 } from '@/src/components/CardDeck/mockCardDeck';
+import { type Word } from '@/src/components/CardDeck/cardDeckTypes';
 import WordCardHeader from '@/src/components/WordCard/WordCardHeader';
 import WordRank from '@/src/components/WordRank';
 import { render } from '@testing-library/react-native';
@@ -33,7 +34,7 @@ const mockWordRank = jest.mocked(WordRank);
 describe('<WordCardHeader />', () => {
   beforeEach(() => {
     mockWordRank.mockClear();
-    const currentCard = {
+    const currentCard: Word = {
       id: 'word_noun_cafe',
       frenchWord: 'cafe',
       englishWords: ['coffee'],

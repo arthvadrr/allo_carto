@@ -3,6 +3,7 @@ import {
   makeMockCardDeck,
   makeMockCardDeckState,
 } from '@/src/components/CardDeck/mockCardDeck';
+import { type Word } from '@/src/components/CardDeck/cardDeckTypes';
 import MappedWords from '@/src/components/WordCard/MappedWords';
 import { useWordCardUI } from '@/src/components/WordCard/useWordCardUI';
 import { initialWordCardState } from '@/src/components/WordCard/wordCardContext';
@@ -21,7 +22,7 @@ const mockUseWordCardUI = jest.mocked(useWordCardUI);
  */
 describe('<MappedWords />', () => {
   beforeEach(() => {
-    const currentCard = {
+    const currentCard: Word = {
       id: 'word_noun_cafe',
       frenchWord: 'cafe',
       englishArticle: 'The',

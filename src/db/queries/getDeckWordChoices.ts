@@ -25,7 +25,8 @@ interface DeckEnglishWordsRow {
  */
 export default async function getDeckWordChoices({
 	wordIds,
-}: GetDeckEnglishWordsProps): Promise<string[][]> {
+}: GetDeckEnglishWordsProps): Promise<string[]> {
+	let resultWords: string[] = [];
 	const database = await getDB();
 	const quests = wordIds.map(() => '?').join(',');
 
@@ -39,9 +40,15 @@ export default async function getDeckWordChoices({
 		wordIds,
 	);
 
-	const englishWords: string[][] = rows.map(row =>
-		JSON.parse(row.englishWords),
-	);
+	/**
+	 * Since we can have multiple correct answers,
+	 * we use arrays. This means we will have an
+	 * array of arrays of correct answers, but we
+	 * only want a single array of choices, so
+	 * that's why we use flatMap, to flatten the
+	 * nested arrays into one choices array.
+	 */
+	resultWords = rows.flatMap(row => JSON.parse(row.englishWords));
 
-	return englishWords satisfies string[][];
+	return resultWords;
 }
