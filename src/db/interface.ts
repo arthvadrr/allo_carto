@@ -3,7 +3,9 @@ import * as SQLite from 'expo-sqlite';
 import type { CardDeck } from '../components/CardDeck/cardDeckTypes';
 import { CardRarity, CEFR, Word } from '../components/CardDeck/cardDeckTypes';
 import shuffleArray from '../util/shuffleArray';
+import { getDB, logThisIfItFails } from './connection';
 import getDeckWordChoices from './queries/getDeckWordChoices';
+export { getDB } from './connection';
 
 /**
  * Typing
@@ -45,39 +47,6 @@ interface WordRankRow {
  *
  * Our DB dir is for our own seeders and queries/interface.
  */
-let db: SQLite.SQLiteDatabase | null = null;
-
-export async function getDB(): Promise<SQLite.SQLiteDatabase> {
-	try {
-		if (db) {
-			return db;
-		}
-
-		db = await SQLite.openDatabaseAsync('allo_carto.db');
-
-		if (!db) {
-			throw new Error('DB not found, SQLite.openDatabaseAsync failed.');
-		}
-
-		return db;
-	} catch (e) {
-		console.error('Failed to init db:', e);
-		throw e;
-	}
-}
-
-export async function logThisIfItFails<T>(
-	message: string,
-	fn: () => Promise<T>,
-): Promise<T> {
-	try {
-		return await fn();
-	} catch (error) {
-		console.error(`DB step failed: ${message}`, error);
-		throw error;
-	}
-}
-
 /**
  * Check if are tables exist and are seeded.
  * If not, call the seeder
