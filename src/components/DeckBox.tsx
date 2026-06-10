@@ -69,8 +69,6 @@ export default function DeckBox({ deck }: ChooseCardDeckProps) {
         userId: user.id
       });
 
-      console.log('DECK', deck);
-
       if (deck) {
         cardDeckDispatch({ type: 'SET_DECK', payload: deck });
         router.push('/CardDeck');

@@ -23,6 +23,8 @@ function mockState(currentIndex = 0): CardDeckStateProps {
     currentIndex,
     currentId: firstWord.id,
     cardDeck: makeMockCardDeck({ words: [firstWord, secondWord] }),
+    correctWords: [],
+    incorrectWords: [],
   };
 }
 

@@ -18,6 +18,8 @@ function mockState(words = [firstWord, secondWord]): CardDeckStateProps {
 		currentIndex: 0,
 		currentId: words[0]?.id ?? '',
 		cardDeck: makeMockCardDeck({ words }),
+		correctWords: [],
+		incorrectWords: [],
 	};
 }
 
@@ -54,6 +56,30 @@ describe('cardDeckReducer', () => {
 		);
 	});
 
+	test('adds the current word to correct words', () => {
+		const state = {
+			...mockState(),
+			incorrectWords: [firstWord],
+		};
+
+		const nextState = cardDeckReducer(state, { type: 'ADD_CORRECT_WORD' });
+
+		expect(nextState.correctWords).toEqual([firstWord]);
+		expect(nextState.incorrectWords).toEqual([]);
+	});
+
+	test('adds the current word to incorrect words', () => {
+		const state = {
+			...mockState(),
+			correctWords: [firstWord],
+		};
+
+		const nextState = cardDeckReducer(state, { type: 'ADD_INCORRECT_WORD' });
+
+		expect(nextState.correctWords).toEqual([]);
+		expect(nextState.incorrectWords).toEqual([firstWord]);
+	});
+
 	/**
 	 * Make sure setting a new deck gives us expected state
 	 */
@@ -69,5 +95,7 @@ describe('cardDeckReducer', () => {
 		expect(nextState.cardDeck).toBe(newDeck);
 		expect(nextState.currentIndex).toBe(0);
 		expect(nextState.currentId).toBe(thirdWord.id);
+		expect(nextState.correctWords).toEqual([]);
+		expect(nextState.incorrectWords).toEqual([]);
 	});
 });

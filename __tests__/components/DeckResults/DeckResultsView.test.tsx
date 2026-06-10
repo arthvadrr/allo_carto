@@ -87,6 +87,8 @@ describe('<DeckResultsView />', () => {
         currentIndex: 0,
         currentId: words[0].id,
         cardDeck,
+        correctWords: [words[0]],
+        incorrectWords: [words[1]],
       }),
       cardDeckDispatch: jest.fn(),
       currentCard: words[0],

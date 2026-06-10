@@ -104,6 +104,8 @@ export function makeMockCardDeckState(
 		currentIndex: 0,
 		currentId: cardDeck.words[0]?.id ?? '',
 		cardDeck,
+		correctWords: [],
+		incorrectWords: [],
 		...overrides,
 	};
 }

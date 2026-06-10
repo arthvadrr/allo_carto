@@ -24,10 +24,6 @@ export default function filterFillerWords({
 	words = englishArticles,
 	correctWords,
 }: FilterFillerWordsProps) {
-	console.log('AMOUNT', amount);
-	console.log('WORDS', words);
-	console.log('CORRECTWORDS', correctWords);
-
 	/**
 	 * Normalize caps
 	 */
