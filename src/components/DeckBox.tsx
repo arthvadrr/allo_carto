@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
   imageBackgroundStyle: {
     display: 'flex',
     justifyContent: 'flex-end',
-    height: 200,
+    height: 180,
   },
   cardFooterStyle: {
     padding: 12,
