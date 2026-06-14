@@ -13,7 +13,7 @@ const decks = [DeckCoffeeShop, DeckGroceryStore, DeckClocksAndTime];
 /**
  * ChooseCardDeck component
  */
-export default function ChooseCardDeck() {
+export default function CardDeckSelect() {
 
   /**
    * Destructure styles
