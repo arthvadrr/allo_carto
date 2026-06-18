@@ -1,32 +1,8 @@
-import { StyleSheet } from "react-native";
+import PlaceSelectView from "@/src/components/PlaceSelectView";
 
 /**
- * ChooseCardDeck component
+ * Route wrapper for the place selection view
  */
-export default function CardDeckSelect() {
-
-  /**
-   * Destructure styles
-   */
-  const {
-    placeSelectStyle,
-  } = styles;
-
-  /**
-   * Render the card grid
-   */
-  return (
-    <>
-    </>
-  );
+export default function PlaceSelect() {
+  return <PlaceSelectView />;
 }
-
-/**
- * Styles
- */
-const styles = StyleSheet.create({
-  placeSelectStyle: {
-    display: 'flex',
-    gap: 8,
-  },
-})

@@ -91,10 +91,10 @@ export default function AppLayout() {
                     headerBackButtonDisplayMode: 'minimal',
                     headerTitle: 'Review a deck'
                   }} />
-                  <Stack.Screen name="(routes)/ChooseCardDeck" options={{
+                  <Stack.Screen name="(routes)/PlaceSelect" options={{
                     headerShown: true,
                     headerBackTitle: 'Home',
-                    headerTitle: 'Choose a Deck',
+                    headerTitle: 'Choose a Chapter and Place',
                     headerBackButtonDisplayMode: 'minimal',
                   }} />
                   <Stack.Screen name="(routes)/DeckResults" options={{
