@@ -1,37 +1,54 @@
-import { DeckCoffeeShop } from "@/data/french/decks/deck__coffee_shop";
-import { DeckGroceryStore } from "@/data/french/decks/deck__grocery_store";
-import { DeckClocksAndTime } from "@/data/french/decks/deck__time";
+import type { DeckPlace } from "@/data/french/deckAtlas";
+import { deckAtlas } from "@/data/french/deckAtlas";
 import DeckBox from "@/src/components/DeckBox";
-import { FlatList, StyleSheet } from "react-native";
-
-/**
- * Add more decks here
- * TODO: Maybe barrel
- */
-const decks = [DeckCoffeeShop, DeckGroceryStore, DeckClocksAndTime];
+import { useLocalSearchParams } from "expo-router";
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import colors from "../colors";
 
 /**
  * ChooseCardDeck component
- */
+*/
 export default function CardDeckSelect() {
+  const { placeId } = useLocalSearchParams<{ placeId?: string }>();
 
   /**
    * Destructure styles
-   */
+  */
   const {
     cardGridStyle,
+    noDecksContainerStyle,
+    noDecksTextStyle
   } = styles;
+
+  function findPlaceById(placeId: string | undefined): DeckPlace | undefined {
+    for (const chapter of deckAtlas.chapters) {
+      for (const place of chapter.places) {
+        if (place.id === placeId) return place;
+      }
+    }
+  }
+
+  const decks = findPlaceById(placeId)?.decks || [];
 
   /**
    * Render the card grid
    */
   return (
-    <FlatList
-      contentContainerStyle={cardGridStyle}
-      data={decks}
-      renderItem={({ item }) => <DeckBox deck={item} />}
-      keyExtractor={(deck, index) => `${deck.title}-${index}`}
-    />
+    <>
+      {decks.length > 0 && (
+        <FlatList
+          contentContainerStyle={cardGridStyle}
+          data={decks}
+          renderItem={({ item }) => <DeckBox deck={item} />}
+          keyExtractor={(deck, index) => `${deck.title}-${index}`}
+        />
+      )}
+      {decks.length === 0 && (
+        <View style={noDecksContainerStyle}>
+          <Text style={noDecksTextStyle}>Sorry! No decks found.</Text>
+        </View>
+      )}
+    </>
   );
 }
 
@@ -41,6 +58,13 @@ export default function CardDeckSelect() {
 const styles = StyleSheet.create({
   cardGridStyle: {
     display: 'flex',
-    gap: 8,
   },
+  noDecksContainerStyle: {
+    display: 'flex',
+    padding: 12
+  },
+  noDecksTextStyle: {
+    textAlign: 'center',
+    color: colors.light.text
+  }
 })

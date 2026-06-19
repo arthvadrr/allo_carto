@@ -91,6 +91,12 @@ export default function AppLayout() {
                     headerBackButtonDisplayMode: 'minimal',
                     headerTitle: 'Review a deck'
                   }} />
+                  <Stack.Screen name="(routes)/CardDeckSelect" options={{
+                    headerShown: true,
+                    headerBackTitle: 'Back',
+                    headerBackButtonDisplayMode: 'minimal',
+                    headerTitle: 'Choose a Deck'
+                  }} />
                   <Stack.Screen name="(routes)/PlaceSelect" options={{
                     headerShown: true,
                     headerBackTitle: 'Home',
