@@ -88,6 +88,7 @@ Real quick so I don't forget...
 - Include deck colors on flash cards
 - Add words properly to the new decks
 - Card decoration / color badge based on letters and mapped colors of the word IDs
+- SVG chapter and progress map (visual and data)
 
 ## Free art and assets credits
 
