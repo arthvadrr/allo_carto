@@ -3,7 +3,7 @@ import type { CardDeck } from '@/src/components/CardDeck/cardDeckTypes';
 /**
  * Image src
  */
-const airportOiseau = require('@/src/app/assets/images/places/airport-oiseau.jpg');
+const airportOiseau = require('@/src/app/assets/images/decks/grocery-store.jpg');
 
 /**
  * Our second deck!

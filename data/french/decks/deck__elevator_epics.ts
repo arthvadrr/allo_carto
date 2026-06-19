@@ -1,12 +1,16 @@
 import type { CardDeck } from '@/src/components/CardDeck/cardDeckTypes';
 
+/*
+ * TODO: curate actual words for this deck
+ */
+const elevatorEpics = require('@/src/app/assets/images/decks/elevator-epics.jpg');
+
 export const DeckElevatorEpics: CardDeck = {
 	title: 'Elevator Epics',
-	description:
-		'Floors/elevator terms, pool / spa / hot tub, microwave, lighting, wi-fi,',
+	description: 'Epic stories from random people in elevators.',
 	CEFR: ['A1', 'A2'],
 	words: [],
-	image: undefined,
+	image: elevatorEpics,
 	wordChoices: [],
 	wordIds: [],
 };
