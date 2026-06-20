@@ -207,6 +207,5 @@ const styles = StyleSheet.create({
     color: colors.light.text,
   },
   pressedLinkText: {
-    color: colors.light.primary,
   }
 })
