@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     boxShadow: `0 20px 0 ${colors.dark.border}`,
   },
   cardBorderInnerStyle: {
-    borderRadius: 12,
+    borderRadius: 14,
     borderWidth: 1,
     borderColor: colors.dark.border
   },

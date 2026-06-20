@@ -8,6 +8,7 @@ import { words_a2_nouns } from './nouns/words_a2_nouns';
 import { words_a2_gate_prepositions } from './prepositions/words_a2_gate_prepositions';
 import { words_a2_prepositions } from './prepositions/words_a2_prepositions';
 import { words_a2_gate_verbs } from './verbs/words_a2_gate_verbs';
+import { words_a2_elevator_epics } from './words_a2_elevator_epics';
 
 export * from './adjectives/words_a2_adjectives';
 export * from './adjectives/words_a2_gate_adjectives';
@@ -19,6 +20,7 @@ export * from './nouns/words_a2_nouns';
 export * from './prepositions/words_a2_gate_prepositions';
 export * from './prepositions/words_a2_prepositions';
 export * from './verbs/words_a2_gate_verbs';
+export * from './words_a2_elevator_epics';
 
 export const words_a2 = [
 	...words_a2_adjectives,
@@ -31,4 +33,5 @@ export const words_a2 = [
 	...words_a2_gate_prepositions,
 	...words_a2_prepositions,
 	...words_a2_gate_verbs,
+	...words_a2_elevator_epics,
 ];
