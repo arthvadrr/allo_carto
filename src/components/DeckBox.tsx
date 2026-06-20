@@ -153,12 +153,7 @@ export default function DeckBox({ deck }: SelectCardDeckProps) {
           <View style={imageContainerStyle}>
             <ImageBackground source={image} style={imageStyle} />
           </View>
-          <LinearGradient
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            colors={[gradientStart, gradientEnd]}
-            style={badgeContainerStyle}
-          >
+          <View style={[badgeContainerStyle, { backgroundColor: deckColors?.light ?? colors.dark.primary }]}>
             <View style={badgeCountContainerStyle}>
               <Text style={badgeCountTextStyle}>{rankCounts.fnew}</Text>
               <MaterialIcons color={colors.light.text} size={badgeIconSize} name="fiber-new" />
@@ -183,7 +178,7 @@ export default function DeckBox({ deck }: SelectCardDeckProps) {
               <Text style={badgeCountTextStyle}>{rankCounts.memorized}</Text>
               <MaterialIcons color={colors.light.text} size={16} name="psychology" />
             </View>
-          </LinearGradient>
+          </View>
           <View style={cardFooterStyle}>
             <LinkButton
               handler={() => handleDeckSelect(deck)}
@@ -194,7 +189,7 @@ export default function DeckBox({ deck }: SelectCardDeckProps) {
           </View>
         </View>
       </View>
-    </View >
+    </View>
   );
 }
 
@@ -291,7 +286,6 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingTop: 4,
     paddingBottom: 4,
-    borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: colors.dark.border
   },
