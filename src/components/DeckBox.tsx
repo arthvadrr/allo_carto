@@ -14,14 +14,14 @@ import GradientText from "./GradientText";
 /**
  * Typing
  */
-interface ChooseCardDeckProps {
+interface SelectCardDeckProps {
   deck: CardDeck;
 }
 
 /**
- * ChooseCardDeck component
+ * DeckBox component
  */
-export default function DeckBox({ deck }: ChooseCardDeckProps) {
+export default function DeckBox({ deck }: SelectCardDeckProps) {
   const user = useUserContext();
   const { cardDeckDispatch } = useCardDeck();
   const {
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
   },
   cardBorderInnerStyle: {
     borderRadius: 12,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: colors.dark.border
   },
   cardHeaderStyle: {
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     height: 200,
   },
   cardFooterStyle: {
-    padding: 8,
+    padding: 12,
     paddingTop: 8,
     paddingBottom: 16,
     borderBottomLeftRadius: 8,

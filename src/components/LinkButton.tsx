@@ -70,6 +70,7 @@ export default function LinkButton({
     deckColorStyles = {
       backgroundColor: deckColors.light,
       shadowColor: deckColors.dark,
+      borderColor: deckColors.dark
     };
   }
 
