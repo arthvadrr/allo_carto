@@ -91,6 +91,8 @@ Real quick so I don't forget...
 - SVG chapter and progress map (visual and data)
 - Place hero image frame (like a polaroid or something? Idk)
 - Bruh you need more words with the same part of speech sheesh
+- Deck count on place selection
+- Word rank counts on decks
 
 ## Free art and assets credits
 
