@@ -163,11 +163,6 @@ const styles = StyleSheet.create({
     borderColor: colors.light.border,
   },
   titleContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    maxWidth: '100%',
   },
   gradientTextContainer: {
     display: 'flex',
@@ -226,7 +221,7 @@ const styles = StyleSheet.create({
   cardFooterStyle: {
     padding: 12,
     paddingTop: 8,
-    paddingBottom: 16,
+    paddingBottom: 20,
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,
     borderColor: colors.light.border
