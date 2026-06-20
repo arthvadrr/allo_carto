@@ -12,6 +12,20 @@ interface FilterFillerWordsProps {
 	correctWords: string[];
 }
 
+function getUniqueWords(words: string[]) {
+	const uniqueWords = new Map<string, string>();
+
+	for (const word of words) {
+		const normalizedWord = word.toLowerCase();
+
+		if (!uniqueWords.has(normalizedWord)) {
+			uniqueWords.set(normalizedWord, word);
+		}
+	}
+
+	return [...uniqueWords.values()];
+}
+
 /**
  * This is a helper function for
  * use with the buttons on flashcards.
@@ -25,33 +39,12 @@ export default function filterFillerWords({
 	correctWords,
 }: FilterFillerWordsProps) {
 	/**
-	 * Different French words can have the same English translation.
-	 * This can create duplicate answer buttons when we combine their answers.
-	 * Here we remove the duplicates
+	 * Different French words can have the same English
+	 * translations so we remove the duplicates.
 	 */
-	const seenWords = new Set<string>();
-
-	const uniqueWords = words.filter(word => {
-		const normalizedWord = word.toLowerCase();
-
-		if (seenWords.has(normalizedWord)) return false;
-
-		seenWords.add(normalizedWord);
-		return true;
-	});
-
-	const seenCorrectWords = new Set<string>();
-
-	const uniqueCorrectWords = correctWords.filter(word => {
-		const normalizedWord = word.toLowerCase();
-
-		if (seenCorrectWords.has(normalizedWord)) return false;
-
-		seenCorrectWords.add(normalizedWord);
-		return true;
-	});
-
-	const lowerCaseCorrectWords = new Set(
+	const uniqueWords = getUniqueWords(words);
+	const uniqueCorrectWords = getUniqueWords(correctWords);
+	const normalizedCorrectWords = new Set(
 		uniqueCorrectWords.map(word => word.toLowerCase()),
 	);
 
@@ -60,7 +53,7 @@ export default function filterFillerWords({
 	 * (also shuffle and slice to amount)
 	 */
 	const wordsCopy = [...shuffleArray(uniqueWords)]
-		.filter(word => !lowerCaseCorrectWords.has(word.toLowerCase()))
+		.filter(word => !normalizedCorrectWords.has(word.toLowerCase()))
 		.slice(0, amount);
 
 	return shuffleArray([
