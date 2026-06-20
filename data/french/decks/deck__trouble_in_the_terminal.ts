@@ -12,7 +12,7 @@ export const DeckTroubleInTheTerminal: CardDeck = {
 	title: 'Trouble at the Terminal',
 	description:
 		'Information about the airport, late, early, times, crowds, people rushing, business, etc.',
-	CEFR: ['B1', 'B2'],
+	CEFR: ['A1', 'B2'],
 	words: [],
 	image: troubleInTerminal,
 	wordChoices: [],

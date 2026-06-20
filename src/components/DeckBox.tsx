@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light.background,
     overflow: 'hidden',
     borderRadius: 18,
-    borderWidth: 6,
+    borderWidth: 4,
     borderColor: colors.light.border,
     boxShadow: `0 20px 0 ${colors.dark.border}`,
   },
