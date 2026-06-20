@@ -126,7 +126,6 @@ const MappedButton = memo(function MappedButtonMemo({
   return (
     <Animated.View
       style={wcsButtonContainer}
-      key={word}
     >
       <AnimatedPressable
         style={[
@@ -233,9 +232,9 @@ const MappedWords = memo(
       highlightTextDanger,
     ]);
 
-    return words.map((word: string) => (
+    return words.map((word: string, index: number) => (
       <MappedButton
-        key={word}
+        key={`${word}-${index}`}
         word={word}
         isActive={word === activeWord}
         isCorrectWord={

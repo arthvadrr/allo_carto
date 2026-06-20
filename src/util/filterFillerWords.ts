@@ -25,22 +25,46 @@ export default function filterFillerWords({
 	correctWords,
 }: FilterFillerWordsProps) {
 	/**
-	 * Normalize caps
+	 * Different French words can have the same English translation.
+	 * This can create duplicate answer buttons when we combine their answers.
+	 * Here we remove the duplicates
 	 */
-	let lowerCaseCorrectWords = correctWords.map((word: string) =>
-		word.toLowerCase(),
+	const seenWords = new Set<string>();
+
+	const uniqueWords = words.filter(word => {
+		const normalizedWord = word.toLowerCase();
+
+		if (seenWords.has(normalizedWord)) return false;
+
+		seenWords.add(normalizedWord);
+		return true;
+	});
+
+	const seenCorrectWords = new Set<string>();
+
+	const uniqueCorrectWords = correctWords.filter(word => {
+		const normalizedWord = word.toLowerCase();
+
+		if (seenCorrectWords.has(normalizedWord)) return false;
+
+		seenCorrectWords.add(normalizedWord);
+		return true;
+	});
+
+	const lowerCaseCorrectWords = new Set(
+		uniqueCorrectWords.map(word => word.toLowerCase()),
 	);
 
 	/**
 	 * Remove the correct answer from this choices arr
 	 * (also shuffle and slice to amount)
 	 */
-	let wordsCopy = [...shuffleArray(words)]
-		.filter(word => !lowerCaseCorrectWords.includes(word.toLowerCase()))
+	const wordsCopy = [...shuffleArray(uniqueWords)]
+		.filter(word => !lowerCaseCorrectWords.has(word.toLowerCase()))
 		.slice(0, amount);
 
 	return shuffleArray([
 		...wordsCopy.filter(article => article !== 'DELETE'),
-		...correctWords,
+		...uniqueCorrectWords,
 	]);
 }
