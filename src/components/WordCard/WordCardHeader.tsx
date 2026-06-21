@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
     flexGrow: 1
   },
   rarityTextStyle: {
-    fontFamily: 'red-hat-variable'
-
+    fontFamily: 'red-hat-variable',
   }
 });
