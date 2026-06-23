@@ -1,4 +1,4 @@
-import type MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import type { ComponentProps } from 'react';
 
 export type WordRankKey =
@@ -23,27 +23,27 @@ export const wordRankDefinitions: WordRankDefinition[] = [
 	},
 	{
 		key: 'bronze',
-		minCorrectCount: 5,
+		minCorrectCount: 3,
 		iconName: 'stars',
 	},
 	{
 		key: 'silver',
-		minCorrectCount: 15,
+		minCorrectCount: 7,
 		iconName: 'military-tech',
 	},
 	{
 		key: 'gold',
-		minCorrectCount: 30,
+		minCorrectCount: 12,
 		iconName: 'emoji-events',
 	},
 	{
 		key: 'diamond',
-		minCorrectCount: 60,
+		minCorrectCount: 15,
 		iconName: 'diamond',
 	},
 	{
 		key: 'memorized',
-		minCorrectCount: 80,
+		minCorrectCount: 25,
 		iconName: 'psychology',
 	},
 ];
