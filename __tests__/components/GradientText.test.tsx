@@ -13,7 +13,7 @@ describe('<GradientText />', () => {
         <GradientText
           colors={['#111111', '#eeeeee']}
           fontSize={20}
-          fontWeight="700"
+          fontWeight={700}
           text="Bonjour"
         />
     );
