@@ -20,6 +20,25 @@ interface CardContainerProps {
   isCurrent: boolean;
 }
 
+const MIN_FILLER_POOL_SIZE = 3;
+
+function getUniqueCandidateCount(words: string[], correctWords: string[]) {
+  const normalizedCorrectWords = new Set(
+    correctWords.map(correctWord => correctWord.toLowerCase()),
+  );
+  const uniqueCandidates = new Set<string>();
+
+  for (const word of words) {
+    const normalizedWord = word.toLowerCase();
+
+    if (!normalizedCorrectWords.has(normalizedWord)) {
+      uniqueCandidates.add(normalizedWord);
+    }
+  }
+
+  return uniqueCandidates.size;
+}
+
 /**
  * WordCardContainer Component
  */
@@ -55,13 +74,21 @@ export default function WordCardContainer({ word, isCurrent }: CardContainerProp
       if (loadedWordId.current === word.id) return;
       loadedWordId.current = word.id;
 
-      let matchingWordChoices = cardDeckState.cardDeck.wordChoices
+      const deckWordChoices = cardDeckState.cardDeck.wordChoices
         .flatMap(choice => choice.englishWords);
+      let matchingWordChoices = deckWordChoices;
 
       if (word.partOfSpeech) {
         matchingWordChoices = cardDeckState.cardDeck.wordChoices
           .filter(choice => choice.partOfSpeech === word.partOfSpeech)
           .flatMap(choice => choice.englishWords);
+
+        if (
+          getUniqueCandidateCount(matchingWordChoices, word.englishWords) <
+          MIN_FILLER_POOL_SIZE
+        ) {
+          matchingWordChoices = deckWordChoices;
+        }
       }
 
       setFillerWords(await getFillerWords({

@@ -4,7 +4,7 @@ export const words_c1_room_keys_prepositions: Word[] = [
 	{
 		id: 'word_preposition_moyennant',
 		frenchWord: 'moyennant',
-		englishWords: ['for'],
+		englishWords: ['in exchange for'],
 		isVulgar: false,
 		lemmaId: 'moyennant',
 		partOfSpeech: 'preposition',
@@ -52,7 +52,7 @@ export const words_c1_room_keys_prepositions: Word[] = [
 	{
 		id: 'word_preposition_aupres_de',
 		frenchWord: 'auprès de',
-		englishWords: ['near'],
+		englishWords: ['with'],
 		isVulgar: false,
 		lemmaId: 'aupres_de',
 		partOfSpeech: 'preposition',
@@ -88,7 +88,7 @@ export const words_c1_room_keys_prepositions: Word[] = [
 	{
 		id: 'word_preposition_faute_de',
 		frenchWord: 'faute de',
-		englishWords: ['lacking'],
+		englishWords: ['for lack of'],
 		isVulgar: false,
 		lemmaId: 'faute_de',
 		partOfSpeech: 'preposition',
