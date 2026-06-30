@@ -47,7 +47,7 @@ export default function DeckResultsView() {
 
   function handleFinish() {
     if (placeId) {
-      router.replace({
+      router.dismissTo({
         pathname: '/CardDeckSelect',
         params: { placeId },
       });
