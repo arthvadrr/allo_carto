@@ -1,18 +1,18 @@
 import { router } from 'expo-router';
 import { useCallback, useEffect, useState } from "react";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
-import colors from '../app/colors';
-import sharedStyles from '../app/sharedStyles';
-import { getDeck } from "../db/interface";
-import type { DeckRankCounts } from '../db/queries/getDeckRankCounts';
-import getDeckRankCounts, { emptyDeckRankCounts } from '../db/queries/getDeckRankCounts';
-import { useUserContext } from "../db/useUserContext";
-import { WordRankDefinition, WordRankKey, wordRankDefinitions } from '../util/wordRanks';
-import { useCardDeck } from "./CardDeck/useCardDeck";
-import GradientText from './GradientText';
-import LinkButton from "./LinkButton";
-import LockOverlay from './LockOverlay';
-import { RankIcon } from './WordRank';
+import colors from '../../app/colors';
+import sharedStyles from '../../app/sharedStyles';
+import { getDeck } from "../../db/interface";
+import type { DeckRankCounts } from '../../db/queries/getDeckRankCounts';
+import getDeckRankCounts, { emptyDeckRankCounts } from '../../db/queries/getDeckRankCounts';
+import { useUserContext } from "../../db/useUserContext";
+import { WordRankDefinition, WordRankKey, wordRankDefinitions } from '../../util/wordRanks';
+import { useCardDeck } from "../CardDeck/useCardDeck";
+import GradientText from '../GradientText';
+import LinkButton from "../LinkButton";
+import LockOverlay from '../LockOverlay';
+import { RankIcon } from '../WordRank';
 
 export default function CardDeckRankSelectView() {
   const user = useUserContext();
