@@ -3,7 +3,7 @@ import {
   makeMockCardDeckState,
 } from '@/src/components/CardDeck/mockCardDeck';
 import { type Word } from '@/src/components/CardDeck/cardDeckTypes';
-import DeckResultsView from '@/src/components/DeckResults/DeckResultsView';
+import DeckResultsView from '@/src/components/Views/DeckResultsView';
 import { DeckToTheGate } from '@/data/french/decks';
 import { router } from 'expo-router';
 import { useLinkProps } from '@react-navigation/native';

@@ -7,7 +7,7 @@ import colors from "../../app/colors";
 import { useCardDeck } from "../CardDeck/useCardDeck";
 import GradientText from '../GradientText';
 import LinkButton from '../LinkButton';
-import ResultsList from './ResultsList';
+import ResultsList from '../ResultsList';
 
 const englishVowels = ['a', 'e', 'i', 'o', 'u', 'y']
 
