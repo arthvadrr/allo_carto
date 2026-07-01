@@ -203,18 +203,18 @@ const styles = StyleSheet.create({
   cardInnerStyle: {
     backgroundColor: colors.light.background,
     overflow: 'hidden',
-    borderRadius: 18,
-    borderWidth: 4,
+    borderRadius: 24,
+    borderWidth: 6,
     marginRight: 8,
     marginLeft: 8,
-    padding: 8,
+    padding: 6,
     borderColor: colors.light.border,
     boxShadow: `0 20px 0 ${colors.dark.border}`,
   },
   cardBorderInnerStyle: {
-    borderRadius: 14,
+    borderRadius: 16,
     borderWidth: 1,
-    borderColor: colors.dark.border
+    borderColor: colors.dark.border,
   },
   cardHeaderStyle: {
     display: 'flex',
