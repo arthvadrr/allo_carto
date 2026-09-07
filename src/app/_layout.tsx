@@ -146,6 +146,9 @@ export default function AppLayout() {
 											headerBackTitle: 'Back',
 											headerTitle: '',
 											headerBackButtonDisplayMode: 'minimal',
+											scrollEdgeEffects: {
+												top: 'hidden',
+											},
 										}}
 									/>
 									<Stack.Screen

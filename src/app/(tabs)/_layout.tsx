@@ -17,13 +17,14 @@ export default function TabsLayout({ size = 28 }) {
 			<Tabs.Screen
 				name="index"
 				options={{
-					title: 'Home',
-					headerTitle: 'Allo',
+					title: 'Stories',
+					headerTitle: '',
+					headerTransparent: true,
 					tabBarIcon: ({ color }) => (
 						<MaterialSymbol
 							color={color}
 							size={size}
-							name="home"
+							name="auto_stories"
 						/>
 					),
 				}}
