@@ -166,6 +166,7 @@ export default function AppLayout() {
 										options={{
 											headerShown: true,
 											headerBackTitle: 'Back',
+											headerTransparent: true,
 											headerBackButtonDisplayMode: 'minimal',
 											headerTitle: 'View cards',
 										}}

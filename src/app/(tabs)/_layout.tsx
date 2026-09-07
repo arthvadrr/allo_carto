@@ -11,7 +11,10 @@ export default function TabsLayout({ size = 28 }) {
 		<Tabs
 			screenOptions={{
 				tabBarActiveTintColor: colors.light.secondary,
-				tabBarInactiveTintColor: colors.light.background,
+				tabBarInactiveTintColor: colors.light.border,
+				tabBarIconStyle: {
+					marginBottom: 4,
+				},
 			}}
 		>
 			<Tabs.Screen
@@ -30,6 +33,19 @@ export default function TabsLayout({ size = 28 }) {
 				}}
 			/>
 			<Tabs.Screen
+				name="collection"
+				options={{
+					title: 'Collections',
+					tabBarIcon: ({ color }) => (
+						<MaterialSymbol
+							color={color}
+							size={size}
+							name="collections_bookmark"
+						/>
+					),
+				}}
+			/>
+			<Tabs.Screen
 				name="settings"
 				options={{
 					title: 'Settings',
@@ -40,13 +56,6 @@ export default function TabsLayout({ size = 28 }) {
 							name="settings"
 						/>
 					),
-				}}
-			/>
-			<Tabs.Screen
-				name="TestLoader"
-				options={{
-					headerShown: true,
-					headerTitle: 'Test Loader',
 				}}
 			/>
 		</Tabs>
